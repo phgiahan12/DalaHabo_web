@@ -18,7 +18,7 @@
 
             @include('admin.alert')
 
-            <form action="../../../public/admin/users/login/store" method="post">
+            <form action="../../../admin/users/login/store" method="post">
                 <div class="input-group mb-3">
                     <input type="email" name="email" class="form-control" placeholder="Email">
                     <div class="input-group-append">

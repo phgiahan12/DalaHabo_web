@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
     public function index() {
-        echo 'Hello world';
+        return view('admin.dashboard', [
+            'title' => 'DalaHabo Admin | Dashboard'
+        ]);
     }
 }
