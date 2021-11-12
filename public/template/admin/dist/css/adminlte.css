@@ -29293,7 +29293,7 @@ html.maximized-card {
   float: left;
   font-size: 1.1rem;
   font-weight: 400;
-  margin: 0;
+  margin-top: 0.2rem;
 }
 
 .card-text {

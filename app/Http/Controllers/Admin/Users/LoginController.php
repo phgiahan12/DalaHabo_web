@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function index() {
         return view('admin.users.login', [
-            'title' => 'DalaHabo | Admin - Đăng nhập' 
+            'title' => 'Đăng nhập' 
         ]);
     }
 
@@ -22,8 +22,8 @@ class LoginController extends Controller
 
         if(Auth::attempt([
                 'email' => $request->input('email'),
-                'password' => $request->input('password')
-                //'level' => 1  --Kiem tra level, neu la 1 (admin) -> success, nguoc lai: failed
+                'password' => $request->input('password'),
+                'level' => 1
             ], $request->input('remember'))) {
             
             return redirect()->route('admin');
