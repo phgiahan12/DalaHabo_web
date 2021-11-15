@@ -16,23 +16,22 @@ Route::get('admin/users/login', [LoginController::class, 'index'])->name('login'
 Route::post('admin/users/login/store', [LoginController::class, 'store']);
 
 //Require login
-Route::middleware(['auth'])->group(function() {
-    
-    Route::prefix('admin')->group(function() {
-        
+Route::middleware(['auth'])->group(function () {
+
+    Route::prefix('admin')->group(function () {
+
         Route::get('/', [MainController::class, 'index'])->name('admin');
         Route::get('dashboard', [MainController::class, 'index']);
 
         #Danh mục
-        Route::prefix('categories')->group(function() {
+        Route::prefix('categories')->group(function () {
 
             Route::get('all', [CategoryController::class, 'all']);
-            
             Route::get('add', [CategoryController::class, 'add']);
             Route::post('add', [CategoryController::class, 'store']);
+            Route::get('edit/{category}', [CategoryController::class, 'show']);
+            Route::post('edit/{category}', [CategoryController::class, 'update']);
             Route::delete('destroy', [CategoryController::class, 'destroy']);
         });
-
     });
-    
 });

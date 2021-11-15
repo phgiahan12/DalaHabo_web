@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     @include('admin.header')
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Site wrapper -->
     <div class="wrapper">
@@ -15,7 +17,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
             </ul>
-            
+
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
                 <li class="nav-item">
@@ -47,7 +49,7 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">15 Notifications</span>
                         <div class="dropdown-divider"></div>
-                        
+
                         <a href="#" class="dropdown-item">
                             <i class="fas fa-envelope mr-2"></i> 4 new messages
                             <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
@@ -67,13 +69,14 @@
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                 </li>
-                
+                <li class="nav-item border-md-right"></li>
                 <li class="nav-item dropdown">
                     <a data-toggle="dropdown" class="nav-link" href="#">
                         <div class="user-panel pb-2">
                             <div class="image">
-                                <img src="../../template/admin/dist/img/avatar6.png" class="img-circle" alt="User Image">
+                                <img src="/template/admin/dist/img/avatar6.png" class="img-circle" alt="User Image">
                             </div>
+                            <span class="ml-2 d-none d-lg-inline small">Gia Hân</span>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg">
@@ -106,14 +109,15 @@
                     </div>
                 </div>
             </section>
-            
+
             <!-- Content -->
             @yield('content')
         </div>
         <!-- /.content-wrapper -->
     </div>
     <!-- ./wrapper -->
-    
+
     @include('admin.footer')
 </body>
+
 </html>

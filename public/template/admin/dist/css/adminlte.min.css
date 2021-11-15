@@ -13067,8 +13067,8 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 }
 .nav-sidebar .menu-is-opening > .nav-link i.right,
 .nav-sidebar .menu-open > .nav-link i.right {
-    -webkit-transform: rotate(-90deg);
-    transform: rotate(-90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 .nav-sidebar > .nav-item {
     margin-bottom: 0;
