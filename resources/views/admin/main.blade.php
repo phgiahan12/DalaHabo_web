@@ -76,7 +76,7 @@
                             <div class="image">
                                 <img src="/template/admin/dist/img/avatar6.png" class="img-circle" alt="User Image">
                             </div>
-                            <span class="ml-2 d-none d-lg-inline small">Gia Hân</span>
+                            <span class="ml-2 d-none d-lg-inline small">{{Session::get('username')}}</span>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg">
@@ -87,7 +87,7 @@
                             <i class="fas fa-users mr-1"></i> Cài đặt
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href="/admin/logout" class="dropdown-item">
                             <i class="fas fa-power-off mr-2"></i> Đăng xuất
                         </a>
                     </div>

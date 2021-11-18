@@ -25,19 +25,19 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-images"></i>
                                 <p>
-                                    Quản lý slider
+                                    Slider
                                     <i class="fas fa-angle-right right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="/admin/sliders/all" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách slider</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#l" class="nav-link">
+                                    <a href="/admin/sliders/create" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm slider</p>
                                     </a>
@@ -49,7 +49,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-swatchbook"></i>
                                 <p>
-                                    Quản lý danh mục
+                                    Danh mục
                                     <i class="fas fa-angle-right right"></i>
                                 </p>
                             </a>
@@ -61,7 +61,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/admin/categories/add" class="nav-link">
+                                    <a href="/admin/categories/create" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm danh mục</p>
                                     </a>
@@ -73,7 +73,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-map-marked-alt"></i>
                                 <p>
-                                    Quản lý địa điểm
+                                    Địa điểm
                                     <i class="fas fa-angle-right right"></i>
                                 </p>
                             </a>
@@ -97,7 +97,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-blog"></i>
                                 <p>
-                                    Quản lý bài viết
+                                    Bài viết
                                     <i class="fas fa-angle-right right"></i>
                                 </p>
                             </a>
@@ -121,7 +121,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
                                 <p>
-                                    Quản lý yêu cầu
+                                    Yêu cầu
                                     <i class="fas"></i>
                                 </p>
                             </a>
@@ -131,7 +131,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-book-reader"></i>
                                 <p>
-                                    Quản lý hướng dẫn viên
+                                    Hướng dẫn viên
                                     <i class="fas fa-angle-right right"></i>
                                 </p>
                             </a>
@@ -155,7 +155,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Quản lý người dùng
+                                    Người dùng
                                     <i class="fas fa-angle-right right"></i>
                                 </p>
                             </a>

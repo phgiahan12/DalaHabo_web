@@ -28,7 +28,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function add()
+    public function create()
     {
         return view('admin.categories.add', [
             'title' => 'Thêm danh mục',

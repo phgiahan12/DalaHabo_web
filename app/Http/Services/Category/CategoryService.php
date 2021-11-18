@@ -12,6 +12,7 @@ class CategoryService
     public function create($request)
     {
         try {
+            $request->except("_token");
             Category::create([
                 'name' => (string) $request->input('name'),
                 'description' => (string) $request->input('description'),
@@ -32,7 +33,7 @@ class CategoryService
 
     public function count()
     {
-        return DB::table('categories')->count();
+        return Category::count();
     }
 
     public function update($category, $request)
@@ -47,11 +48,6 @@ class CategoryService
             return false;
         }
         return true;
-        /*C2:
-            $category->name = (string) $request->input('name');
-            $category->description = (string) $request->input('description');
-            $category->active = (int) $request->input('active');
-        */
     }
 
     public function destroy($request)

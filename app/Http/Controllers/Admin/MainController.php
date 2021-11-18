@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class MainController extends Controller
 {
@@ -11,7 +12,7 @@ class MainController extends Controller
     {
         return view('admin.dashboard', [
             'title' => 'Tổng quan',
-            'menu' => 'Tổng quan'
+            'menu' => 'Tổng quan',
         ]);
     }
 }
