@@ -25,7 +25,7 @@
                                 <label class="col-sm-2 col-form-label">Mô tả danh mục</label>
                                 <textarea style="resize:none" rows="5" name="description" class="form-control" id="category_description" placeholder="Mô tả danh mục">{{$category->description}}</textarea>
                             </div>
-                            <!-- <textarea name="category_description" class="form-control" id="summernote" placeholder="Mô tả danh mục"></textarea> -->
+                            
                         </div>
                         <div class="form-group row justify-content-center">
                             <div class="col-md-11">

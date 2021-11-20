@@ -17,13 +17,13 @@
                         <div class="form-group row justify-content-center">
                             <div class="col-md-11">
                                 <label for="category" class="col-form-label">Tên danh mục</label>
-                                <input type="text" name="name" class="form-control" placeholder="Tên danh mục">
+                                <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Tên danh mục">
                             </div>
                         </div>
                         <div class="form-group row justify-content-center">
                             <div class="col-md-11">
                                 <label class="col-form-label">Mô tả danh mục</label>
-                                <textarea style="resize:none" rows="4" name="description" class="form-control" id="category_description" placeholder="Mô tả danh mục"></textarea>
+                                <textarea style="resize:none" rows="4" name="description" class="form-control" id="category_description" placeholder="Mô tả danh mục">{{old('description')}}</textarea>
                             </div>
                         </div>
                         <div class="form-group row justify-content-center">

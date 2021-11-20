@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class UploadService
 {
@@ -14,7 +15,7 @@ class UploadService
                 $image_name = current(explode('.', $get_full_image_name));
                 $name = $image_name.rand(0, 99) . '.' . $request->file('file')->getClientOriginalExtension();
 
-                $path_full = 'uploads';
+                $path_full = 'uploads/sliders';
                 $request->file('file')->storeAs(
                     'public/' . $path_full, $name
                 );
@@ -24,6 +25,18 @@ class UploadService
             } catch(\Exception $err) {
                 return false;
             }
+        }
+        
+    }
+
+    public function destroy($request)
+    {
+        try {
+            $path = str_replace('storage', 'public', $request->input('val'));
+            Storage::delete($path);
+            return true;
+        } catch (\Exception $err){
+            return false;
         }
         
     }

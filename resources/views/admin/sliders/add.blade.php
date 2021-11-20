@@ -17,12 +17,12 @@
                         <div class="form-group row justify-content-center">
                             <div class="col-md-5">
                                 <label for="name" class="col-form-label">Tiêu đề</label>
-                                <input type="text" name="name" class="form-control" placeholder="Tiêu đề">
+                                <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Tiêu đề">
                             </div>
 
                             <div class="col-md-6">
                                 <label for="name" class="col-form-label">Đường dẫn</label>
-                                <input type="text" name="url" class="form-control" placeholder="Đường dẫn">
+                                <input type="text" name="url" value="{{old('url')}}" class="form-control" placeholder="Đường dẫn">
                             </div>
                         </div>
 
@@ -30,7 +30,7 @@
                             <div class="col-md-11">
                                 <label class="col-form-label">Hình ảnh</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="upload">
+                                    <input type="file" class="custom-file-input"  id="upload" accept="image/*">
                                     <label class="custom-file-label" for="upload" name="file" id="file"></label>
                                     <input type="hidden" name="image" id="image">
                                 </div>

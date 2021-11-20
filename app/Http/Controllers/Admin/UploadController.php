@@ -25,7 +25,19 @@ class UploadController extends Controller
         };
 
         return response()->json(['error' => true]);
+    }
 
+    public function destroy(Request $request)
+    {
+        $result = $this->uploadService->destroy($request);
+        if ($result) {
+            return response()->json([
+                'error' => false,
+            ]);
+        }
+        return response()->json([
+            'error' => true
+        ]);
     }
 
 }

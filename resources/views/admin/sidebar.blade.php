@@ -79,52 +79,18 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/" class="nav-link">
+                                    <a href="/admin/places/all" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách địa điểm</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="/admin/places/create" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm địa điểm</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-blog"></i>
-                                <p>
-                                    Bài viết
-                                    <i class="fas fa-angle-right right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh sách bài viết</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm bài viết</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-shopping-cart"></i>
-                                <p>
-                                    Yêu cầu
-                                    <i class="fas"></i>
-                                </p>
-                            </a>
                         </li>
 
                         <li class="nav-item">
@@ -174,7 +140,66 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-shopping-cart"></i>
+                                <p>
+                                    Yêu cầu
+                                    <i class="fas"></i>
+                                </p>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-blog"></i>
+                                <p>
+                                    Bài viết và bình luận
+                                    <i class="fas fa-angle-right right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Danh sách bài viết</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thêm bài viết</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book-reader"></i>
+                                <p>
+                                    Tài khoản
+                                    <i class="fas fa-angle-right right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Danh sách tài khoản</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thêm tài khoản</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <!-- /.sidebar-menu -->
+                    </ul>
+                </nav>
             </div>
             <!-- /.sidebar -->
         </aside>

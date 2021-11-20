@@ -8,12 +8,12 @@
 <script src="/template/admin/js/main.js"></script>
 
 <!-- Summernote -->
-<!-- <script src="../../template/admin/plugins/summernote/summernote-bs4.min.js"></script> -->
+<!-- <script src="/template/admin/plugins/summernote/summernote-bs4.min.js"></script> -->
 <!-- CodeMirror -->
-<!-- <script src="../../template/admin/plugins/codemirror/codemirror.js"></script>
-<script src="../../template/admin/plugins/codemirror/mode/css/css.js"></script>
-<script src="../../template/admin/plugins/codemirror/mode/xml/xml.js"></script>
-<script src="../../template/admin/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script> -->
+<!-- <script src="/template/admin/plugins/codemirror/codemirror.js"></script>
+<script src="/template/admin/plugins/codemirror/mode/css/css.js"></script>
+<script src="/template/admin/plugins/codemirror/mode/xml/xml.js"></script>
+<script src="/template/admin/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script> -->
 <!-- Page specific script -->
 <!-- <script>
   $(function () {
@@ -27,3 +27,5 @@
     });
   })
 </script> -->
+
+@yield('footer')

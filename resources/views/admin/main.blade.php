@@ -81,7 +81,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg">
                         <a href="#" class="dropdown-item">
-                            <i class="fas fa-suitcase mr-2"></i> Tài khoản
+                            <i class="fas fa-suitcase mr-2"></i> Thông tin cá nhân
                         </a>
                         <a href="#" class="dropdown-item">
                             <i class="fas fa-users mr-1"></i> Cài đặt

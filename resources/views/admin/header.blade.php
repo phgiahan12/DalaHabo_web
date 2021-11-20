@@ -15,8 +15,10 @@
 
 <link rel="stylesheet" href="/template/admin/css/main.css"></link>
 
-<!-- summernote -->
-<!-- <link rel="stylesheet" href="../../template/admin/plugins/summernote/summernote-bs4.min.css"> -->
-<!-- CodeMirror -->
-<!-- <link rel="stylesheet" href="../../template/admin/plugins/codemirror/codemirror.css">
-<link rel="stylesheet" href="../../template/admin/plugins/codemirror/theme/monokai.css"> -->
+<!-- summernote
+<link rel="stylesheet" href="/template/admin/plugins/summernote/summernote-bs4.min.css">
+CodeMirror -->
+<!-- <link rel="stylesheet" href="/template/admin/plugins/codemirror/codemirror.css">
+<link rel="stylesheet" href="/template/admin/plugins/codemirror/theme/monokai.css"> -->
+
+@yield('header')

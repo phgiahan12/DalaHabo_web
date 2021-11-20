@@ -21,7 +21,7 @@ class SliderController extends Controller
     public function all()
     {
         return view('admin.sliders.all', [
-            'title' => 'Tất cả slider',
+            'title' => 'Slider',
             'menu' => 'Quản lý Slider',
             'sliders' => $this->sliderService->getAll(),
             'count' => $this->sliderService->count(),
@@ -31,7 +31,7 @@ class SliderController extends Controller
     public function create()
     {
         return view('admin.sliders.add', [
-            'title' => 'Thêm slider',
+            'title' => 'Slider',
             'menu' => 'Quản lý slider'
         ]);
     }
@@ -45,7 +45,7 @@ class SliderController extends Controller
     public function show(Slider $slider)
     {
         return view('admin.sliders.edit', [
-            'title' => 'Cập nhật slider: ' . $slider->name,
+            'title' => 'Slider: ',
             'menu' => 'Quản lý slider',
             'slider' => $slider
         ]);

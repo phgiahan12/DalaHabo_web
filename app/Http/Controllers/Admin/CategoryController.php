@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function all()
     {
         return view('admin.categories.all', [
-            'title' => 'Tất cả danh mục',
+            'title' => 'Danh mục',
             'menu' => 'Quản lý danh mục',
             'categories' => $this->categoryService->getAll(),
             'count' => $this->categoryService->count(),
@@ -31,7 +31,7 @@ class CategoryController extends Controller
     public function create()
     {
         return view('admin.categories.add', [
-            'title' => 'Thêm danh mục',
+            'title' => 'Danh mục',
             'menu' => 'Quản lý danh mục'
         ]);
     }
@@ -45,7 +45,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         return view('admin.categories.edit', [
-            'title' => 'Cập nhật danh mục: ' . $category->name,
+            'title' => 'Danh mục',
             'menu' => 'Quản lý danh mục',
             'category' => $category
         ]);
