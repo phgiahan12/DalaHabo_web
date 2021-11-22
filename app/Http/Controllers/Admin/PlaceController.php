@@ -27,8 +27,8 @@ class PlaceController extends Controller
     {
         return view('admin.places.all', [
             'title' => 'Địa điểm',
-            'menu' => 'Quản lý danh mục',
-            'places' => $this->placeService->getAll(),
+            'menu' => 'Danh sách địa điểm',
+            'places' => $this->placeService->getAll()->paginate(5),
             'count' => $this->placeService->count(),
         ]);
     }
@@ -37,17 +37,18 @@ class PlaceController extends Controller
     {
         return view('admin.places.add', [
             'title' => 'Địa điểm',
-            'menu' => 'Quản lý địa điểm',
+            'menu' => 'Thêm địa điểm',
             'categories' => $this->categoryService->getAll(),
         ]);
     }
 
-    public function store(CreateFormRequest $request)
+    public function store(Request $request)
     {
+
         $rsplace = $this->placeService->create($request);
         if ($rsplace === true) {
-            $placeId = $this->placeService->getPlaceIdByAdress($request);
-            $this->galleryService->create($request, $placeId);
+            $placeId = $this->placeService->getPlaceId();
+            $this->galleryService->createPlaceImages($request, $placeId);
         }
         return redirect()->back();
         
@@ -57,8 +58,10 @@ class PlaceController extends Controller
     {
         return view('admin.places.edit', [
             'title' => 'Địa điểm',
-            'menu' => 'Quản lý địa điểm',
-            'place' => $place
+            'menu' => 'Danh sách địa điểm',
+            'item' => $place->name,
+            'place' => $place,
+            'categories' => $this->categoryService->getAll(),
         ]);
     }
 
@@ -74,7 +77,7 @@ class PlaceController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa địa điểm thành công'
+                'message' => 'Xóa thành công'
             ]);
         }
         return response()->json([

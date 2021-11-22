@@ -13,7 +13,7 @@
 
                         <li class="nav-item">
                             <a href="/admin" class="nav-link active">
-                                <i class="nav-icon fas fa-chart-pie"></i>
+                                <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     Tổng quan
                                 </p>
@@ -103,13 +103,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="/admin/tourguides/all" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách hướng dẫn viên</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="/admin/tourguides/create" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm hướng dẫn viên</p>
                                     </a>
@@ -176,7 +176,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book-reader"></i>
+                                <i class="nav-icon fas fa-user-alt"></i>
                                 <p>
                                     Tài khoản
                                     <i class="fas fa-angle-right right"></i>

@@ -1,6 +1,15 @@
 @extends('admin.main')
 
 @section('content')
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>{{$menu}}</h1>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
@@ -9,13 +18,17 @@
                 <!-- small card -->
                 <div class="small-box bg-purple">
                     <div class="inner">
-                        <h3>150</h3>
+                        <?php if($places < 10) : ?>
+                            <h3>0{{$places}}</h3>
+                        <?php else : ?>
+                            <h3>{{$places}}</h3>
+                        <?php endif; ?>
                         <p>Địa điểm</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
-                    <a href="#" class="small-box-footer">
+                    <a href="/admin/places/all" class="small-box-footer">
                         Chi tiết <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -32,7 +45,7 @@
                     <div class="icon">
                         <i class="fas fa-book-reader"></i>
                     </div>
-                    <a href="#" class="small-box-footer">
+                    <a href="/admin/tourguides/all" class="small-box-footer">
                         Chi tiết <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>

@@ -1,21 +1,42 @@
 @extends('admin.main')
 
 @section('content')
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>{{$title}}</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/admin">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#"></a>{{$title}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{$menu}}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="content">
     @include('admin.alert')
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">{{$title}}</h3>
+                    <h3 class="card-title">{{$menu}}</h3>
                 </div>
                 <!-- /.card-header -->
 
                 <!-- form start -->
-                <form action="" method="POST">
+                <form action="" method="POST" id="form">
                     <div class="card-body">
-                        <div class="form-group row justify-content-center">
-                            <div class="col-md-5">
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-5">
                                 <label for="name" class="col-form-label">Tiêu đề</label>
                                 <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Tiêu đề">
                             </div>
@@ -26,15 +47,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group row justify-content-center">
-                            <div class="col-md-11">
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-11">
                                 <label class="col-form-label">Hình ảnh</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input"  id="upload" accept="image/*">
+                                <div class="form-group custom-file">
+                                    <input type="file" class="custom-file-input"  name="upload" id="upload" accept="image/*"> 
                                     <label class="custom-file-label" for="upload" name="file" id="file"></label>
                                     <input type="hidden" name="image" id="image">
                                 </div>
-                                <div id="image_show" class="mt-3"></div>
+                                <div id="image_show" class="mt-3 col-md-3"></div>
                             </div>
                         </div>
 
@@ -66,4 +87,40 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('footer')
+    <script>
+        $(function () {
+            $('#form').validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    upload: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    name: {
+                        required: "Vui lòng nhập tên slider",
+                    },
+                    upload: {
+                        required: "Vui lòng thêm hình ảnh",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
 @endsection

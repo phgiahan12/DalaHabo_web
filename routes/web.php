@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\PlaceController;
+use App\Http\Controllers\Admin\CkeditorController;
+use App\Http\Controllers\Admin\TourguideController;
 
 
 
@@ -39,18 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
         #Upload Gallery
         Route::post('upload-gallery/services', [GalleryController::class, 'store']);
-
-        #Gallery
-        Route::prefix('galleries')->group(function () {
-
-            Route::get('all', [GalleryController::class, 'all']);
-            Route::get('create', [GalleryController::class, 'create']);
-            Route::post('create', [GalleryController::class, 'store']);
-            Route::get('edit/{slider}', [GalleryController::class, 'show']);
-            Route::post('edit/{slider}', [GalleryController::class, 'update']);
-            Route::delete('destroy', [GalleryController::class, 'destroy']);
-        });
-        
+        Route::post('ckeditor/image_upload', [CkeditorController::class, 'upload'])->name('upload');
 
         #Slider
         Route::prefix('sliders')->group(function () {
@@ -83,10 +74,28 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{place}', [PlaceController::class, 'show']);
             Route::post('edit/{place}', [PlaceController::class, 'update']);
             Route::delete('destroy', [PlaceController::class, 'destroy']);
+
+            #Gallery
+            Route::get('galleries/{place}', [GalleryController::class, 'allPlaceImages']);
+            Route::post('galleries/{place}', [GalleryController::class, 'createPlaceImages']);
+            Route::delete('galleries/destroy', [GalleryController::class, 'destroyPlaceImages']);
         });
 
         #Hướng dẫn viên
+        Route::prefix('tourguides')->group(function () {
 
+            Route::get('all', [TourguideController::class, 'all']);
+            Route::get('create', [TourguideController::class, 'create']);
+            Route::post('create', [TourguideController::class, 'store']);
+            Route::get('edit/{tourguide}', [TourguideController::class, 'show']);
+            Route::post('edit/{tourguide}', [TourguideController::class, 'update']);
+            Route::delete('destroy', [TourguideController::class, 'destroy']);
+
+            #Gallery
+            // Route::get('galleries/{place}', [GalleryController::class, 'all']);
+            // Route::post('galleries/{place}', [GalleryController::class, 'create']);
+            // Route::delete('galleries/destroy', [GalleryController::class, 'destroy']);
+        });
 
         #Khách hàng
 

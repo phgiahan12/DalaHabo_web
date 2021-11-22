@@ -3,8 +3,8 @@
 namespace App\Http\Services\Place;
 
 use App\Models\Place;
-use App\Models\Gallery;
-use Illuminate\Support\Facades\DB;
+use App\Models\PlaceImages;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 
 class PlaceService
@@ -31,12 +31,12 @@ class PlaceService
 
     public function getAll()
     {
-        return Place::all();
+        return Place::orderBy('name');
     }
 
-    public function getPlaceIdByAdress($request)
+    public function getPlaceId()
     {
-        $place = Place::where('address', $request->input('address'))->first();
+        $place = Place::all()->last();
         return $place->id;
     }
 
@@ -51,7 +51,7 @@ class PlaceService
             $place->fill($request->input());
             $place->save();
 
-            Session::flash('success', 'Cập nhật địa điểm thành công');
+            Session::flash('success', 'Cập nhật thành công');
         } catch (\Exception $err) {
             Session::flash('error', $err->getMessage());
             return false;
@@ -63,6 +63,16 @@ class PlaceService
     {
         $category = Place::where('id', $request->input('id'))->first();
         if ($category) {
+            $image = PlaceImages::where('place_id', $request->input('id'))->get();
+            $length = count($image);
+            if ($image) {
+                for($i = 0; $i < $length; $i++) {
+                    $path = str_replace('storage', 'public', $image[$i]->image);
+                    Storage::delete($path);
+                    $image[$i]->delete();
+                }
+            }
+
             return Place::where('id', $request->input('id'))->delete();
         }
         return false;

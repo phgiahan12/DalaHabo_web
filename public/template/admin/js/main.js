@@ -8,7 +8,7 @@ $.ajaxSetup({
 //--------- Xóa 1 dòng trong bảng ---------//
 
 function removeRow(id, url) {
-    if (confirm('Bạn có chắc chắn muốn mục này không?')) {
+    if (confirm('Bạn có chắc chắn muốn xóa mục này không?')) {
         $.ajax({
             type: 'DELETE',
             datatype: 'JSON',
@@ -105,9 +105,9 @@ $("#mul-file-input").change(function(e) {
         }
 
         for(var i=0; i < flength; i++) {
-            console.log(i);
             const form = new FormData();
             form.append('file', files[i]);
+            form.append('folder',$('#folder').val())
 
             if(fileName !== '') {
                 $('#images-show:first').html('');
@@ -143,3 +143,4 @@ $("#mul-file-input").change(function(e) {
     }
     
 });
+

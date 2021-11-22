@@ -6,6 +6,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
     <!-- Site wrapper -->
     <div class="wrapper">
 
@@ -84,7 +85,7 @@
                             <i class="fas fa-suitcase mr-2"></i> Thông tin cá nhân
                         </a>
                         <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-1"></i> Cài đặt
+                            <i class="fas fa-cog mr-2"></i> Cài đặt
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="/admin/logout" class="dropdown-item">
@@ -102,13 +103,7 @@
         <!-- Content Wrapper -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2 col-sm-6">
-                        <h1>{{$menu}}</h1>
-                    </div>
-                </div>
-            </section>
+            
 
             <!-- Content -->
             @yield('content')

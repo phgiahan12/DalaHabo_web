@@ -1,34 +1,57 @@
 @extends('admin.main')
 
 @section('content')
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>{{$title}}</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/admin">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#"></a>{{$title}}</li>
+                    <li class="breadcrumb-item"><a href="/admin/categories/all">{{$menu}}</a></li>
+                    <li class="breadcrumb-item"><a href="#"></a>{{$item}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="content">
     @include('admin.alert')
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">{{$title}}</h3>
+                    <h3 class="card-title">{{$item}}</h3>
                 </div>
                 <!-- /.card-header -->
 
                 <!-- form start -->
-                <form action="" method="POST">
+                <form action="" method="POST" id="form">
                     <div class="card-body">
-                        <div class="form-group row justify-content-center">
-                            <div class="col-md-11">
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-11">
                                 <label for="category" class="col-form-label">Tên danh mục</label>
                                 <input type="text" name="name" value="{{$category->name}}" class="form-control" placeholder="Tên danh mục">
                             </div>
                         </div>
-                        <div class="form-group row justify-content-center">
-                            <div class="col-md-11">
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-11">
                                 <label class="col-sm-2 col-form-label">Mô tả danh mục</label>
                                 <textarea style="resize:none" rows="5" name="description" class="form-control" id="category_description" placeholder="Mô tả danh mục">{{$category->description}}</textarea>
                             </div>
                             
                         </div>
-                        <div class="form-group row justify-content-center">
-                            <div class="col-md-11">
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-11">
                                 <label class="col-form-label">Trạng thái</label>
                                 <div class="mt-2 ml-1 row">
                                     <div class="custom-control custom-radio col-4">
@@ -47,7 +70,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary float-right">Cập nhật danh mục</button>
-                        <a class="btn btn-light" href="#" onClick="">
+                        <a class="btn btn-light" href="/admin/categories/all" onClick="">
                             <i class="fas fa-chevron-left mr-2"></i>
                             <span>Trở về</span>
                         </a>
@@ -59,4 +82,34 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('footer')
+<script>
+        $(function () {
+            $('#form').validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    name: {
+                        required: "Vui lòng nhập tên danh mục",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
 @endsection

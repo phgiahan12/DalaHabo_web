@@ -22,7 +22,7 @@ class SliderController extends Controller
     {
         return view('admin.sliders.all', [
             'title' => 'Slider',
-            'menu' => 'Quản lý Slider',
+            'menu' => 'Danh sách slider',
             'sliders' => $this->sliderService->getAll(),
             'count' => $this->sliderService->count(),
         ]);
@@ -32,7 +32,7 @@ class SliderController extends Controller
     {
         return view('admin.sliders.add', [
             'title' => 'Slider',
-            'menu' => 'Quản lý slider'
+            'menu' => 'Thêm slider'
         ]);
     }
 
@@ -45,8 +45,9 @@ class SliderController extends Controller
     public function show(Slider $slider)
     {
         return view('admin.sliders.edit', [
-            'title' => 'Slider: ',
-            'menu' => 'Quản lý slider',
+            'title' => 'Slider',
+            'menu' => 'Danh sách slider',
+            'item' => $slider->name,
             'slider' => $slider
         ]);
     }
@@ -63,7 +64,7 @@ class SliderController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa slider thành công'
+                'message' => 'Xóa thành công'
             ]);
         }
         return response()->json([

@@ -5,25 +5,6 @@
 
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
-	config.language = 'vi';
-	config.toolbarGroups = [
-		{ name: 'mode'},
-        { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-        { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-        { name: 'links' },
-        { name: 'insert' },
-        '/',
-        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-		{ name: 'styles' },
-        { name: 'colors' },
-        { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align'] },
-        
-    ];
-
-    config.removePlugins = 'image';
-
-    // Simplify the dialog windows.
-    config.removeDialogTabs = 'image:advanced;link:advanced';
-
-
+	// config.language = 'fr';
+	// config.uiColor = '#AADC6E';
 };

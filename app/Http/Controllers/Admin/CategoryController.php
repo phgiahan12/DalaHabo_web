@@ -22,7 +22,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.all', [
             'title' => 'Danh mục',
-            'menu' => 'Quản lý danh mục',
+            'menu' => 'Danh sách danh mục',
             'categories' => $this->categoryService->getAll(),
             'count' => $this->categoryService->count(),
         ]);
@@ -32,7 +32,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.add', [
             'title' => 'Danh mục',
-            'menu' => 'Quản lý danh mục'
+            'menu' => 'Thêm danh mục'
         ]);
     }
 
@@ -46,7 +46,8 @@ class CategoryController extends Controller
     {
         return view('admin.categories.edit', [
             'title' => 'Danh mục',
-            'menu' => 'Quản lý danh mục',
+            'menu' => 'Danh sách danh mục',
+            'item' => $category->name,
             'category' => $category
         ]);
     }
