@@ -17,4 +17,13 @@ class Place extends Model
         'summary',
         'description',
     ];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function images() {
+        return $this->hasMany(PlaceImages::class);
+    }
+   
 }

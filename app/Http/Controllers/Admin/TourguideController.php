@@ -50,19 +50,19 @@ class TourguideController extends Controller
 
     public function show(Tourguide $tourguide)
     {
-        return view('admin.sliders.edit', [
-            'title' => 'Slider',
-            'menu' => 'Danh sách slider',
+        return view('admin.tourguides.edit', [
+            'title' => 'Hướng dẫn viên',
+            'menu' => 'Danh sách hướng dẫn viên',
             'item' => $tourguide->name,
             'tourguide' => $tourguide
         ]);
     }
 
-    // public function update(Tourguide $slider, CreateFormRequest $request)
-    // {
-    //     $this->sliderService->update($slider, $request);
-    //     return redirect('admin/sliders/all');
-    // }
+    public function update(Tourguide $tourguide, CreateFormRequest $request)
+    {
+        $this->tourguideService->update($tourguide, $request);
+        return redirect('admin/tourguides/all');
+    }
 
     public function destroy(Request $request): JsonResponse
     {

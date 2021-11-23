@@ -53,7 +53,7 @@
                         <th style="width:20%">Tên danh mục</th>
                         <th style="width:45%">Mô tả</th>
                         <th style="width:10%" class="text-center">Trạng thái</th>
-                        <th style="width:10%">&nbsp</th>
+                        <th style="width:10%" class="text-center">Sửa/ Xóa</th>
                     </tr>
                 </thead>
 

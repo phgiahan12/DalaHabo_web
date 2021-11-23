@@ -84,7 +84,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary float-right">Cập nhật slider</button>
+                        <button type="submit" class="btn btn-primary float-right">Cập nhật</button>
                         <a class="btn btn-light" href="/admin/sliders/all" onClick="">
                             <i class="fas fa-chevron-left mr-2"></i>
                             <span>Trở về</span>

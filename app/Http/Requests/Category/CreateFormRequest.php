@@ -28,7 +28,7 @@ class CreateFormRequest extends FormRequest
 
     public function messages() : array {
         return [
-            'name.required' => 'Chưa nhập tên danh mục',
+            'name.required' => 'Vui lòng nhập tên danh mục',
         ];
     }
 }

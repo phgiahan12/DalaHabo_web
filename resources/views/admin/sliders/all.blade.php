@@ -52,9 +52,9 @@
                         <th style="width:15%">Tên slider</th>
                         <th style="width:15%">Đường dẫn</th>
                         <th style="width:15%">Hình ảnh</th>
-                        <th style="width:15%">Cập nhật</th>
+                        <th style="width:15%">Ngày cập nhật</th>
                         <th style="width:10%" class="text-center">Trạng thái</th>
-                        <th style="width:10%">&nbsp</th>
+                        <th style="width:10%" class="text-center">Sửa/ Xóa</th>
                     </tr>
                 </thead>
 

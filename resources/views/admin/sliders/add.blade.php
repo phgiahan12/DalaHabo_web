@@ -37,8 +37,8 @@
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="form-group col-md-5">
-                                <label for="name" class="col-form-label">Tiêu đề</label>
-                                <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Tiêu đề">
+                                <label for="name" class="col-form-label">Tên slider</label>
+                                <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Tên slider">
                             </div>
 
                             <div class="col-md-6">
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="row justify-content-center">
-                            <div class="form-group col-md-11">
+                            <div class="col-md-11">
                                 <label class="col-form-label">Hình ảnh</label>
                                 <div class="form-group custom-file">
                                     <input type="file" class="custom-file-input"  name="upload" id="upload" accept="image/*"> 
@@ -78,7 +78,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary float-right">Thêm slider</button>
+                        <button type="submit" class="btn btn-primary float-right">Tạo mới</button>
                     </div>
                     @csrf
                 </form>

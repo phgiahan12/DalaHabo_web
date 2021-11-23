@@ -40,18 +40,20 @@
                 <form action="" method="POST" id="form">
                     <div class="card-body">
                         <div class="row justify-content-center">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="name" class="col-form-label">Họ tên</label>
                                 <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Họ tên">
                             </div>
-                            <div class="form-group col-md-5">
-                                <label for="name" class="col-form-label">Email</label>
-                                <input type="text" name="email" value="{{old('email')}}" class="form-control" placeholder="Email liên lạc">
-                            </div>
-                        </div>
 
-                        <div class="row justify-content-center">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
+                                <label for="gender" class="col-form-label">Giới tính</label>
+                                <select name="gender" class="form-control">
+                                    <option value="0">Nam</option>
+                                    <option value="1">Nữ</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
                                 <label for="dob" class="col-form-label">Ngày sinh</label>
                                 <div class="input-group date" id="reservationdate" data-target-input="nearest">
                                     <input type="text" name="dob" value="{{old('dob')}}" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="Ngày sinh"/>
@@ -60,52 +62,44 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-6">
+                                <label for="name" class="col-form-label">Email</label>
+                                <input type="text" name="email" value="{{old('email')}}" class="form-control" placeholder="Email liên lạc">
+                            </div>
+
                             <div class="form-group col-md-5">
                                 <label for="name" class="col-form-label">Số điện thoại</label>
                                 <input type="text" name="phone" value="{{old('phone')}}" class="form-control" placeholder="Số điện thoại liên lạc">
                             </div> 
                         </div>
 
-                        <div class="form-group row justify-content-center">
-                            <!-- <div class="col-md-11"> -->
-                                <div class="col-md-6">
-                                    <label class="col-form-label">Giới tính</label>
-                                    <div class="mt-2 ml-1 row">
-                                        <div class="custom-control custom-radio col-5">
-                                            <input class="custom-control-input" type="radio" value="0" id="male" name="gender" checked>
-                                            <label for="male" class="custom-control-label font-weight-normal">Nam</label>
-                                        </div>
-                                        <div class="custom-control custom-radio col-5">
-                                            <input class="custom-control-input" type="radio" value="1" id="female" name="gender">
-                                            <label for="female" class="custom-control-label font-weight-normal">Nữ</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label for="price" class="col-form-label">Giá thuê</label>
-                                    <input type="text" name="rental_price" value="{{old('rental_price')}}" class="form-control" placeholder="Giá thuê">
-                                </div>
-                            <!-- </div> -->
-                            
-                        </div>
-
-                        <div class="form-group row justify-content-center">
-                            <div class="col-md-11">
-                                <label class="col-form-label">Tóm tắt</label>
-                                <textarea style="resize:none" rows="4" name="summary" class="form-control" id="summary" placeholder="Tóm tắt về hướng dẫn viên..">{{old('summary')}}</textarea>
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-11">
+                                <label for="price" class="col-form-label">Giá thuê (VNĐ/Giờ)</label>
+                                <input type="text" name="rental_price" value="{{old('rental_price')}}" class="form-control" placeholder="Giá thuê">
                             </div>
                         </div>
 
-                        <div class="form-group row justify-content-center">
-                            <div class="col-md-11">
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-11">
+                                <label class="col-form-label">Tóm tắt</label>
+                                <textarea style="resize:none" rows="4" name="short_description" class="form-control" id="short_description" placeholder="Tóm tắt về hướng dẫn viên..">{{old('short_description')}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-11">
                                 <label class="col-form-label">Mô tả chi tiết</label>
                                 <textarea name="description" class="form-control" id="description" placeholder="Mô tả địa điểm">{{old('description')}}</textarea>
                             </div>
                             
                         </div>
 
-                        <div class="form-group row justify-content-center">
-                            <div class="col-md-11">
+                        <div class="row justify-content-center">
+                            <div class="form-group col-md-11">
                                 <label class="col-form-label">Hình ảnh</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="file[]" value="{{old('file[]')}}" accept="image/*" id="mul-file-input" multiple>
@@ -120,7 +114,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary float-right">Thêm hướng dẫn viên</button>
+                        <button type="submit" class="btn btn-primary float-right">Tạo mới</button>
                     </div>
                     @csrf
                 </form>
@@ -140,7 +134,8 @@
             resize_minHeight: 300,
             editorplaceholder: 'Mô tả chi tiết về hướng dẫn viên...',
             removeButtons: 'PasteFromWord',
-            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+            filebrowserImageUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+            filebrowserImageBrowseUrl: "{{route('file_browser', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
         });
 

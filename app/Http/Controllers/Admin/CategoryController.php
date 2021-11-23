@@ -64,7 +64,7 @@ class CategoryController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa danh mục thành công'
+                'message' => 'Xóa thành công'
             ]);
         }
         return response()->json([

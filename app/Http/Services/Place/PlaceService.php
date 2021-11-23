@@ -3,7 +3,7 @@
 namespace App\Http\Services\Place;
 
 use App\Models\Place;
-use App\Models\PlaceImages;
+use App\Models\PlaceImage;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 
@@ -31,7 +31,7 @@ class PlaceService
 
     public function getAll()
     {
-        return Place::orderBy('name');
+        return Place::with('category')->orderBy('name')->paginate(10);
     }
 
     public function getPlaceId()
@@ -59,21 +59,30 @@ class PlaceService
         return true;
     }
 
+    public function destroyImages($places) {
+        $images = PlaceImage::where('place_id', $places->id)->get();
+        $length = count($images);
+        try {
+            for($i = 0; $i < $length; $i++) {
+                $path = str_replace('storage', 'public', $images[$i]->image);
+                Storage::delete($path);
+                $images[$i]->delete();
+            }
+        } catch (\Exception $err) {
+            return false;
+        }
+        return true;   
+    }
+
     public function destroy($request)
     {
-        $category = Place::where('id', $request->input('id'))->first();
-        if ($category) {
-            $image = PlaceImages::where('place_id', $request->input('id'))->get();
-            $length = count($image);
-            if ($image) {
-                for($i = 0; $i < $length; $i++) {
-                    $path = str_replace('storage', 'public', $image[$i]->image);
-                    Storage::delete($path);
-                    $image[$i]->delete();
-                }
+        $places = Place::where('id', $request->input('id'))->first();
+        if ($places) {
+            $rs = $this->destroyImages($places);
+            if ($rs === true) {
+                return $places->delete();
             }
-
-            return Place::where('id', $request->input('id'))->delete();
+            return false;
         }
         return false;
     }

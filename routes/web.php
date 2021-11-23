@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
         #Upload Gallery
         Route::post('upload-gallery/services', [GalleryController::class, 'store']);
         Route::post('ckeditor/image_upload', [CkeditorController::class, 'upload'])->name('upload');
+        Route::get('ckeditor/file_browser', [CkeditorController::class, 'file_browser'])->name('file_browser');
 
         #Slider
         Route::prefix('sliders')->group(function () {
@@ -92,9 +93,9 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('destroy', [TourguideController::class, 'destroy']);
 
             #Gallery
-            // Route::get('galleries/{place}', [GalleryController::class, 'all']);
-            // Route::post('galleries/{place}', [GalleryController::class, 'create']);
-            // Route::delete('galleries/destroy', [GalleryController::class, 'destroy']);
+            Route::get('galleries/{tourguide}', [GalleryController::class, 'allTourguideImages']);
+            Route::post('galleries/{tourguide}', [GalleryController::class, 'createTourguideImages']);
+            Route::delete('galleries/destroy', [GalleryController::class, 'destroyTourguideImages']);
         });
 
         #Khách hàng

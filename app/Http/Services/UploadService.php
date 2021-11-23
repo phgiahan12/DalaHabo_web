@@ -2,7 +2,6 @@
 
 namespace App\Http\Services;
 
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class UploadService

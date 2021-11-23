@@ -29,8 +29,8 @@ class CreateFormRequest extends FormRequest
 
     public function messages() : array {
         return [
-            'name.required' => 'Chưa nhập tiêu đề',
-            'image.required' => 'Chưa thêm hình ảnh slider'
+            'name.required' => 'Vui lòng nhập tên slider',
+            'image.required' => 'Vui lòng thêm hình ảnh slider'
         ];
     }
 }

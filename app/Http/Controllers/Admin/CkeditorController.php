@@ -27,13 +27,27 @@ class CkeditorController extends Controller
      
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
             $url = asset('storage/uploads/images/'.$filenametostore); 
-            $msg = 'Image successfully uploaded'; 
+            $msg = 'Upload thành công'; 
             $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
               
             // Render HTML output 
             @header('Content-type: text/html; charset=utf-8'); 
             echo $re;
         }
+    }
+
+    public function file_browser(Request $request)
+    {
+        $paths = glob(public_path('/storage/uploads/images/*'));
+        $fileNames = array();
+        foreach($paths as $path) {
+            array_push($fileNames, basename($path));
+        }
+        $data = array(
+            'fileNames' => $fileNames
+        );
+        
+        return view('admin.images.file_browser')->with($data);
     }
 
 }

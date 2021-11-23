@@ -4,10 +4,10 @@
 <section class="content-header">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <h1>{{$menu}}</h1>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-8">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item">
                         <a href="/admin">
@@ -15,7 +15,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item">{{$title}}</li>
-                    <li class="breadcrumb-item"><a href="/admin/places/all">Danh sách địa điểm</a></li>
+                    <li class="breadcrumb-item"><a href="/admin/tourguides/all">Danh sách hướng dẫn viên</a></li>
                     <li class="breadcrumb-item">{{$menu}}</li>
                     <li class="breadcrumb-item active" aria-current="page">Hình ảnh</li>
                 </ol>
@@ -25,7 +25,6 @@
 </section>
 
 <section class="content">
-    
     @include('admin.alert')
     <div class="card collapsed-card">
         <div class="card-header">
@@ -41,16 +40,16 @@
         
         <div class="card-body p-0">
             <form action="" method="POST">
-                <div class="form-group row justify-content-center">
+                <div class="row justify-content-center">
                     <div class="col-md-11">
                         <label class="col-form-label">Hình ảnh</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="file[]" value="{{old('file[]')}}"accept="image/*" id="mul-file-input"multiple>
-                            <label class="custom-file-label" name="label" for="upload" id="file">{{old('label')}}</label>
+                        <div class="form-group custom-file">
+                            <input type="file" class="custom-file-input" name="file[]" accept="image/*" id="mul-file-input" multiple>
+                            <label class="custom-file-label" name="label" for="file"></label>
                         </div>
                         <div class="row" id="images-show"></div>
                         <input type="hidden" name="image" id="images">
-                        <input type="hidden" name="folder" value="places" id="folder">
+                        <input type="hidden" name="folder" value="tourguides" id="folder">
                         <div class="row justify-content-center mt-3">
                             <button type="submit" class="btn btn-primary">Thêm hình ảnh</button>
                         </div>
@@ -64,7 +63,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title font-weight-normal"><strong>{{$title}}</strong></h3>
+            <h3 class="card-title"><strong>{{$title}}</strong></h3>
         </div>
         <!-- /.card-header -->
 
@@ -72,11 +71,11 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th style="width:10%">STT</th>
-                        <th style="width:25%">Tên hình ảnh</th>
-                        <th style="width:25%">Hình ảnh</th>
-                        <th style="width:20%">Ngày đăng</th>
-                        <th style="width:20%"class="text-center">Xóa</th>
+                        <th>STT</th>
+                        <!-- <th style="width:25%">Tên hình ảnh</th> -->
+                        <th style="width:30%">Hình ảnh</th>
+                        <th>Ngày đăng</th>
+                        <th class="text-center">Xóa</th>
                     </tr>
                 </thead>
                    
@@ -84,26 +83,26 @@
                     @foreach($images as $key => $image)
                         <tr>
                             <td>{{$key + 1}}.</td>
-                            <td>{{$image->name}}</td>
+                            <!-- <td>{{$image->name}}</td> -->
                             <td>
                                 <a href="{{$image->image}}" target="_blank">
-                                    <img src="{{$image->image}}" width="80%">
+                                    <img src="{{$image->image}}" width="40%">
                                 </a>
                             </td>
                             <td>{{$image->updated_at}}</td>
                             <td class="text-center">
                                 <a class="btn btn-danger btn-sm" href="#"
-                                    onClick="removeRow('{{$image->id}}', '/admin/places/galleries/destroy')">
+                                    onClick="removeRow('{{$image->id}}', '/admin/tourguides/galleries/destroy')">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
-                        </tr>
+                        </tr>                      
+                  </div>
                     @endforeach
                 </tbody>
             </table>
         </div>
         <!-- /.card-body -->
-
         <div class="card-footer clearfix">
             <?php if($count === 0) : ?>
                 <strong>Chưa có hình ảnh nào</strong>

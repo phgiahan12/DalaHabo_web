@@ -39,7 +39,11 @@
                 <!-- small card -->
                 <div class="small-box bg-primary">
                     <div class="inner">
-                        <h3>44</h3>
+                        <?php if($tourguides < 10) : ?>
+                            <h3>0{{$tourguides}}</h3>
+                        <?php else : ?>
+                            <h3>{{$tourguides}}</h3>
+                        <?php endif; ?>
                         <p>Hướng dẫn viên</p>
                     </div>
                     <div class="icon">

@@ -31,7 +31,7 @@
             <div class="pl-3 m-0 float-right">
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 350px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tên địa điểm, địa chỉ, trạng thái,...">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm kiếm...">
 
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
@@ -45,14 +45,14 @@
         <!-- /.card-header -->
 
         <div class="card-body p-0 table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover" id="tourguidestable">
                 <thead>
                     <tr>
-                        <th style="width:8%">STT</th>
-                        <th style="width:15%">Họ tên</th>
+                        <!-- <th style="width:8%">STT</th> -->
+                        <th style="width:20%">Họ tên</th>
                         <th style="width:10%">Ngày sinh</th>
                         <th style="width:10%">Giới tính</th>
-                        <th style="width:15%">Email</th>
+                        <th style="width:20%">Email</th>
                         <th style="width:10%">SDT</th>
                         <th style="width:10%" class="text-center">Hình ảnh</th>
                         <th style="width:10%">Giá thuê</th>
@@ -61,7 +61,7 @@
                 </thead>
                     @foreach($tourguides as $key => $tourguide)
                         <tr>
-                            <td>{{$key + 1}}.</td>
+                            <!-- <td>{{$key + 1}}.</td> -->
                             <td>{{$tourguide->name}}</td>
                             <td>{{$tourguide->dob}}</td>
                             @if($tourguide->gender === 0)
@@ -77,7 +77,8 @@
                                     <span class="font-weight-bold">Xem</span>
                                 </a>
                             </td>
-                            <td>{{$tourguide->rental_price}}</td>
+                            
+                            <td id="rental_price">{{$tourguide->rental_price}}</td>
                             <td class="text-center">
                                 <a class="btn btn-info btn-sm " href="/admin/tourguides/edit/{{$tourguide->id}}">
                                     <i class="fas fa-pencil-alt"></i>
@@ -96,15 +97,56 @@
         </div>
         <!-- /.card-body -->
 
-        <div class="card-footer clearfix">
-            <?php if($count === 0) : ?>
-                <strong>Chưa có hướng dẫn viên nào</strong>
-            <?php else : ?>
-                <strong>Số lượng hướng dẫn viên: {{$count}}</strong>
-            <?php endif; ?>
+        <div class="row card-footer clearfix">
+            <div class="col-md-6 mt-1">
+                <?php if($count === 0) : ?>
+                    <strong>Chưa có hướng dẫn viên nào</strong>
+                <?php else : ?>
+                    <strong>Số lượng hướng dẫn viên: {{$count}}</strong>
+                <?php endif; ?>
+            </div>
+            <div class="col-md-6">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-end mb-0">
+                        {!! $tourguides->links() !!}
+                    </ul>
+                </nav>
+            </div>
         </div>
         <!-- /.card-footer -->
     </div>
     <!-- /.card -->
 </section>
+@endsection
+
+@section('footer')
+<script>
+    $(function () {
+        $('#tourguidestable').DataTable({
+            "paging": false,
+            "lengthChange": false,
+            "searching": false,
+            "info": false,
+        
+            "aaSorting": [],
+            columnDefs: [
+                {
+                    orderable: false,
+                    targets: 3,
+                }, {
+                    orderable: false,
+                    targets: 4,
+                }, {
+                    orderable: false,
+                    targets: 5,
+                }, {
+                    orderable: false,
+                    targets: 7,
+                }
+            ],
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
 @endsection

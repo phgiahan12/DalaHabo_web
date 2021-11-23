@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -62,4 +62,22 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
+
+<p align="center"><a href="https://www.uit.edu.vn/" target="_blank"><img src="https://www.uit.edu.vn/sites/vi/files/images/Logos/Logo_UIT_Web.png" class="img-fluid" alt="" width=200></a></p>
+
+## Đồ án cuối kỳ
+
+- Môn học: Phát triển ứng dụng web (IS207.M11.HTCL)
+- Giảng viên hướng dẫn: ThS. Vũ Minh Sang
+
+## Tác giả
+- Phan Hồng Gia Hân - 19520515 (Nhóm trưởng)
+- Trần Mẫn Quân - 19520873
+- Đặng Nguyễn Phước An - 19521171
+- Lê Huỳnh Lan Hạ - 19521453
+
+## Giới thiệu về đồ án
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
+
+@UIT - Trường đại học Công nghệ Thông tin - ĐHQG TP.HCM

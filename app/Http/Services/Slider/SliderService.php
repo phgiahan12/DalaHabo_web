@@ -13,7 +13,7 @@ class SliderService
         try {
             $request->except("_token");
             Slider::create($request->input());
-            Session::flash('success', 'Thêm slider mới thành công');
+            Session::flash('success', 'Tạo mới thành công');
         } catch (\Exception $err) {
             Session::flash('error', $err->getMessage());
             return false;
@@ -49,9 +49,13 @@ class SliderService
     {
         $slider = Slider::where('id', $request->input('id'))->first();
         if ($slider) {
-            $path = str_replace('storage', 'public', $slider->image);
-            Storage::delete($path);
-            return $slider->delete();
+            try {
+                $path = str_replace('storage', 'public', $slider->image);
+                Storage::delete($path);
+                return $slider->delete();
+            } catch (\Exception $err) {
+                return false;
+            }
         }
         return false;
     }

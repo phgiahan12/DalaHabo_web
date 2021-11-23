@@ -54,7 +54,7 @@
                         <th style="width:20%">Địa chỉ</th>
                         <th style="width:20%">Tóm tắt</th>
                         <th style="width:10%" class="text-center">Hình ảnh</th>
-                        <th style="width:10%" class="text-center">Sửa/Xóa</th>
+                        <th style="width:10%" class="text-center">Sửa/ Xóa</th>
                     </tr>
                 </thead>
                     
@@ -63,7 +63,7 @@
                         <tr>
                             <!-- <td>{{$key + 1}}.</td> -->
                             <td>{{$place->name}}</td>
-                            <td>{{$place->category_id}}</td>
+                            <td>{{$place->category->name}}</td>
                             <td>{{$place->address}}</td>
                             <td>{{$place->summary}}</td>
                             <td class="text-center">
@@ -81,8 +81,7 @@
                                 </a>
                             </td>
                         </tr>
-                   @endforeach
-                    
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -90,7 +89,7 @@
 
         <div class="card-footer clearfix">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mt-1">
                     <?php if($count === 0) : ?>
                         <strong>Chưa có địa điểm nào</strong>
                     <?php else : ?>
@@ -100,7 +99,7 @@
                 
                 <div class="col-md-6">
                     <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-end">
+                        <ul class="pagination justify-content-end mb-0">
                            {!! $places->links() !!}
                         </ul>
                     </nav>

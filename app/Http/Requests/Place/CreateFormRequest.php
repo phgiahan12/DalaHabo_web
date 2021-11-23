@@ -24,13 +24,15 @@ class CreateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'address' => 'unique:places'
+            'name' => 'required',
+            'address' => 'required',
         ];
     }
 
     public function messages() : array {
         return [
-            'address.unique' => 'Địa điểm đã tồn tại'
+            'name.required' => 'Vui lòng nhập tên địa điểm',
+            'address.required' => 'Vui lòng nhập địa chỉ',
         ];
     }
 }

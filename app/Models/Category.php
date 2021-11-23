@@ -14,4 +14,8 @@ class Category extends Model
         'description',
         'active',
     ];
+
+    public function places() {
+        return $this->hasMany(Place::class);
+    }
 }

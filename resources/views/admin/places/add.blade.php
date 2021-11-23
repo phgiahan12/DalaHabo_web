@@ -98,7 +98,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary float-right">Thêm địa điểm</button>
+                        <button type="submit" class="btn btn-primary float-right">Tạo mới</button>
                     </div>
                     @csrf
                 </form>

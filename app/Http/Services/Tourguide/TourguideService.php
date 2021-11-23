@@ -3,6 +3,7 @@
 namespace App\Http\Services\Tourguide;
 
 use App\Models\Tourguide;
+use App\Models\TourguideImage;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,7 +32,7 @@ class TourguideService
 
     public function getAll()
     {
-        return Tourguide::all();
+        return Tourguide::orderBy('name')->paginate(10);
     }
 
     public function count()
@@ -59,13 +60,30 @@ class TourguideService
         return true;
     }
 
+    public function destroyImages($tourguide) {
+        $images = TourguideImage::where('tourguide_id', $tourguide->id)->get();
+        $length = count($images);
+        try {
+            for($i = 0; $i < $length; $i++) {
+                $path = str_replace('storage', 'public', $images[$i]->image);
+                Storage::delete($path);
+                $images[$i]->delete();
+            }
+        } catch (\Exception $err) {
+            return false;
+        }
+        return true;
+    }
+
     public function destroy($request)
     {
         $tourguide = Tourguide::where('id', $request->input('id'))->first();
         if ($tourguide) {
-            $path = str_replace('storage', 'public', $tourguide->image);
-            Storage::delete($path);
-            return $tourguide->delete();
+            $rs = $this->destroyImages($tourguide);
+            if ($rs === true) {
+                return $tourguide->delete();
+            }
+            return false;
         }
         return false;
     }

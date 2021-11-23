@@ -121,7 +121,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Người dùng
+                                    Khách hàng
                                     <i class="fas fa-angle-right right"></i>
                                 </p>
                             </a>
@@ -129,13 +129,13 @@
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh sách người dùng</p>
+                                        <p>Danh sách khách hàng</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm người dùng</p>
+                                        <p>Thêm khách hàng</p>
                                     </a>
                                 </li>
                             </ul>

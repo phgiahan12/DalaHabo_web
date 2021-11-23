@@ -28,7 +28,7 @@ class PlaceController extends Controller
         return view('admin.places.all', [
             'title' => 'Địa điểm',
             'menu' => 'Danh sách địa điểm',
-            'places' => $this->placeService->getAll()->paginate(5),
+            'places' => $this->placeService->getAll(),
             'count' => $this->placeService->count(),
         ]);
     }
