@@ -23,7 +23,6 @@
 </section>
 
 <section class="content">
-    @include('admin.alert')
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-primary">
@@ -33,7 +32,7 @@
                 <!-- /.card-header -->
 
                 <!-- form start -->
-                <form action="" method="POST" id="form">
+                <form action="/admin/sliders/create" method="POST" id="add-slider-form">
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="form-group col-md-5">
@@ -54,8 +53,11 @@
                                     <input type="file" class="custom-file-input"  name="upload" id="upload" accept="image/*"> 
                                     <label class="custom-file-label" for="upload" name="file" id="file"></label>
                                     <input type="hidden" name="image" id="image">
+                                    <input type="hidden" name="folder" value="sliders" id="folder">
                                 </div>
-                                <div id="image_show" class="mt-3 col-md-3"></div>
+                                <div id="image_show" class="mt-3 col-md-3 pl-0">
+                                    
+                                </div>
                             </div>
                         </div>
 
@@ -91,8 +93,8 @@
 
 @section('footer')
     <script>
-        $(function () {
-            $('#form').validate({
+        $(function (e) {
+            $('#add-slider-form').validate({
                 rules: {
                     name: {
                         required: true,
@@ -119,7 +121,7 @@
                 },
                 unhighlight: function (element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
-                }
+                },
             });
         });
     </script>

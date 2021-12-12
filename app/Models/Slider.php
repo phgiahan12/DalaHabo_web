@@ -15,4 +15,11 @@ class Slider extends Model
         'image',
         'active',
     ];
+
+    public function scopeSearch($query) {
+        if($keyword = request()->keyword) {
+            $query = $query->where('name', 'like', '%' . $keyword . '%');
+        }
+        return $query;
+    }
 }

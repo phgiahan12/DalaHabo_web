@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tourguide\CreateFormRequest;
 use App\Http\Services\Tourguide\TourguideService;
-use App\Http\Services\GalleryService;
+use App\Http\Services\Tourguide\TourguideImageService;
 use App\Models\Tourguide;
 
 class TourguideController extends Controller
 {
-    protected $tourguideService;
+    protected $tourguideService, $tourguideImageService;
 
-    public function __construct(TourguideService $tourguideService, GalleryService $galleryService)
+    public function __construct(TourguideService $tourguideService, TourguideImageService $tourguideImageService)
     {
         $this->tourguideService = $tourguideService;
-        $this->galleryService = $galleryService;
+        $this->tourguideImageService = $tourguideImageService;
     }
 
     public function all()
@@ -26,7 +26,6 @@ class TourguideController extends Controller
             'title' => 'Hướng dẫn viên',
             'menu' => 'Danh sách hướng dẫn viên',
             'tourguides' => $this->tourguideService->getAll(),
-            'count' => $this->tourguideService->count(),
         ]);
     }
 
@@ -41,11 +40,24 @@ class TourguideController extends Controller
     public function store(CreateFormRequest $request)
     {
         $rstourguide = $this->tourguideService->create($request);
-        if ($rstourguide === true) {
-            $tourguideId = $this->tourguideService->getTourguideId();
-            $this->galleryService->createTourguideImages($request, $tourguideId);
+        
+        if ($rstourguide) {
+            $result = true;
+            if ($request->has('image')) {
+                $tourguideId = $this->tourguideService->getTourguideId();
+                $result = $this->tourguideImageService->create($request, $tourguideId);
+            }
+           
+            if($result) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Tạo mới thành công'
+                ]);
+            }
         }
-        return redirect()->back();
+        return response()->json([
+            'error' => true,
+        ]);
     }
 
     public function show(Tourguide $tourguide)
@@ -60,13 +72,35 @@ class TourguideController extends Controller
 
     public function update(Tourguide $tourguide, CreateFormRequest $request)
     {
-        $this->tourguideService->update($tourguide, $request);
-        return redirect('admin/tourguides/all');
+        $result = $this->tourguideService->update($tourguide, $request);
+        if($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Cập nhật thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true,
+        ]);
     }
 
     public function destroy(Request $request): JsonResponse
     {
         $result = $this->tourguideService->destroy($request);
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true
+        ]);
+    }
+
+    public function destroySelected(Request $request): JsonResponse
+    {
+        $result = $this->tourguideService->destroySelected($request);
         if ($result) {
             return response()->json([
                 'error' => false,

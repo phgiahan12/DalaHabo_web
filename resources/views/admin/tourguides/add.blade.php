@@ -27,7 +27,6 @@
 </section>
 
 <section class="content">
-    @include('admin.alert')
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-primary">
@@ -37,12 +36,13 @@
                 <!-- /.card-header -->
 
                 <!-- form start -->
-                <form action="" method="POST" id="form">
+                <form action="/admin/tourguides/create" method="POST" id="add-tourguide-form">
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="form-group col-md-4">
                                 <label for="name" class="col-form-label">Họ tên</label>
                                 <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Họ tên">
+                                <span class="error invalid-feedback name_error"></span>
                             </div>
 
                             <div class="form-group col-md-3">
@@ -61,6 +61,7 @@
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
                                 </div>
+                                <span class="error invalid-feedback dob_error"></span>
                             </div>
                         </div>
 
@@ -68,11 +69,13 @@
                             <div class="form-group col-md-6">
                                 <label for="name" class="col-form-label">Email</label>
                                 <input type="text" name="email" value="{{old('email')}}" class="form-control" placeholder="Email liên lạc">
+                                <span class="error invalid-feedback email_error"></span>
                             </div>
 
                             <div class="form-group col-md-5">
                                 <label for="name" class="col-form-label">Số điện thoại</label>
                                 <input type="text" name="phone" value="{{old('phone')}}" class="form-control" placeholder="Số điện thoại liên lạc">
+                                <span class="error invalid-feedback phone_error"></span>
                             </div> 
                         </div>
 
@@ -80,6 +83,7 @@
                             <div class="form-group col-md-11">
                                 <label for="price" class="col-form-label">Giá thuê (VNĐ/Giờ)</label>
                                 <input type="text" name="rental_price" value="{{old('rental_price')}}" class="form-control" placeholder="Giá thuê">
+                                <span class="error invalid-feedback rental_price_error"></span>
                             </div>
                         </div>
 
@@ -103,7 +107,7 @@
                                 <label class="col-form-label">Hình ảnh</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="file[]" value="{{old('file[]')}}" accept="image/*" id="mul-file-input" multiple>
-                                    <label class="custom-file-label" name="label" for="upload" id="file">{{old('label')}}</label>
+                                    <label class="custom-file-label" name="label" for="upload" id="file"></label>
                                 </div>
                                 <div class="row" id="images-show"></div>
                                 <input type="hidden" name="image" id="images">
@@ -156,9 +160,12 @@
 
     <script>
         $(function () {
-            $('#form').validate({
+            $('#add-tourguide-form').validate({
                 rules: {
                     name: {
+                        required: true,
+                    },
+                    dob: {
                         required: true,
                     },
                     email: {
@@ -175,6 +182,9 @@
                 messages: {
                     name: {
                         required: "Vui lòng nhập họ tên"
+                    }, 
+                    dob: {
+                        required: "Vui lòng nhập ngày sinh"
                     },
                     email: {
                         required: "Vui lòng nhập email",

@@ -13,9 +13,7 @@ class SliderService
         try {
             $request->except("_token");
             Slider::create($request->input());
-            Session::flash('success', 'Tạo mới thành công');
         } catch (\Exception $err) {
-            Session::flash('error', $err->getMessage());
             return false;
         }
         return true;
@@ -23,7 +21,7 @@ class SliderService
 
     public function getAll()
     {
-        return Slider::all();
+        return Slider::orderBy('id')->search()->get();
     }
 
     public function count()
@@ -37,17 +35,16 @@ class SliderService
             $slider->fill($request->input());
             $slider->save();
 
-            Session::flash('success', 'Cập nhật thành công');
+            return true;
         } catch (\Exception $err) {
-            Session::flash('error', $err->getMessage());
             return false;
         }
-        return true;
     }
 
     public function destroy($request)
     {
-        $slider = Slider::where('id', $request->input('id'))->first();
+        $id = $request->input('id');
+        $slider = Slider::find($id);
         if ($slider) {
             try {
                 $path = str_replace('storage', 'public', $slider->image);
@@ -59,5 +56,26 @@ class SliderService
         }
         return false;
     }
-    
+
+    public function destroySelected($request)
+    {
+        $ids =  explode(',', $request->ids);
+
+        $sliders = Slider::whereIn('id', $ids)->get();
+        $length = count($sliders);
+
+        if ($sliders) {
+            try {
+                for($i = 0; $i < $length; $i++) {
+                    $path = str_replace('storage', 'public', $sliders[$i]->image);
+                    Storage::delete($path);
+                    $sliders[$i]->delete();
+                }
+                return true;
+            } catch (\Exception $err) {
+                return false;
+            }
+        }
+        return false;
+    }
 }

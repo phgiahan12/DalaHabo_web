@@ -25,7 +25,6 @@
 </section>
 
 <section class="content">
-    @include('admin.alert')
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-primary">
@@ -35,7 +34,7 @@
                 <!-- /.card-header -->
 
                 <!-- form start -->
-                <form action="" method="POST" id="form">
+                <form action="/admin/sliders/edit/{{$slider->id}}" method="POST" id="edit-slider-form">
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="form-group col-md-5">
@@ -56,10 +55,11 @@
                                     <input type="file" class="custom-file-input" value="" id="upload">
                                     <label class="custom-file-label" for="upload" name="file" id="file"></label>
                                     <input type="hidden" name="image" value="{{$slider->image}}" id="image">
+                                    <input type="hidden" name="folder" value="sliders" id="folder">
                                 </div>
-                                <div id="image_show" class="mt-3">
+                                <div id="image_show" class="mt-3 col-md-3 pl-0">
                                     <a href="{{$slider->image}}" target="_blank">
-                                        <img src="{{$slider->image}}" width="40%" class="img-thumbnail">
+                                        <img src="{{$slider->image}}" width="100%" class="img-thumbnail">
                                     </a>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary float-right">Cập nhật</button>
-                        <a class="btn btn-light" href="/admin/sliders/all" onClick="">
+                        <a class="btn btn-light" href="{{url()->previous()}}" onClick="">
                             <i class="fas fa-chevron-left mr-2"></i>
                             <span>Trở về</span>
                         </a>
@@ -101,36 +101,36 @@
 
 @section('footer')
 <script>
-        $(function () {
-            $('#form').validate({
-                rules: {
-                    name: {
-                        required: true,
-                    },
-                    upload: {
-                        required: true,
-                    },
+    $(function () {
+        $('#edit-slider-form').validate({
+            rules: {
+                name: {
+                    required: true,
                 },
-                messages: {
-                    name: {
-                        required: "Vui lòng nhập tên slider",
-                    },
-                    upload: {
-                        required: "Vui lòng thêm hình ảnh",
-                    },
+                upload: {
+                    required: true,
                 },
-                errorElement: 'span',
-                errorPlacement: function (error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
+            },
+            messages: {
+                name: {
+                    required: "Vui lòng nhập tên slider",
                 },
-                highlight: function (element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
+                upload: {
+                    required: "Vui lòng thêm hình ảnh",
                 },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
-            });
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
         });
-    </script>
+    });
+</script>
 @endsection

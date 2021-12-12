@@ -9,7 +9,10 @@ class Helper
         $html = '';
         foreach ($categories as $key => $category) {
             $html .= '
-                <tr>
+                <tr id="' . $category->id . '" name="item">
+                    <td>
+                        <input type="checkbox" id="item_checkbox" name="item_checkbox" data-id="' . $category->id . '">
+                    </td>
                     <td>' . $key + 1 . '.</td>
                     <td>' . $category->name . '</td>
                     <td>' . $category->description . '</td>
@@ -19,7 +22,7 @@ class Helper
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                         <a class="btn btn-danger btn-sm" href="#"
-                            onClick="removeRow(' . $category->id . ', \'/admin/categories/destroy\')">
+                            onClick="removeRow(' . $category->id . ', \'/admin/categories/destroy\', \'categories-table\')">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>

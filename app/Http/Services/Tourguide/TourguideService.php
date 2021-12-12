@@ -9,6 +9,22 @@ use Illuminate\Support\Facades\Storage;
 
 class TourguideService
 {
+    public function getAll()
+    { 
+        return Tourguide::orderBy('id')->search()->paginate(10);   
+    }
+
+    public function getTourguideId()
+    {
+        $tourguide = Tourguide::all()->last();
+        return $tourguide->id;
+    }
+
+    public function count()
+    {
+        return Tourguide::count();
+    }
+
     public function create($request)
     {
         try {
@@ -23,27 +39,10 @@ class TourguideService
                 'description' => (string) $request->input('description'),
                 'rental_price' => (double) $request->input('rental_price'),
             ]);
+            return true;
         } catch (\Exception $err) {
-            Session::flash('error', $err->getMessage());
             return false;
         }
-        return true;
-    }
-
-    public function getAll()
-    {
-        return Tourguide::orderBy('name')->paginate(10);
-    }
-
-    public function count()
-    {
-        return Tourguide::count();
-    }
-
-    public function getTourguideId()
-    {
-        $tourguide = Tourguide::all()->last();
-        return $tourguide->id;
     }
 
     public function update($tourguide, $request)
@@ -52,16 +51,15 @@ class TourguideService
             $tourguide->fill($request->input());
             $tourguide->save();
 
-            Session::flash('success', 'Cập nhật thành công');
+            return true;
         } catch (\Exception $err) {
             Session::flash('error', $err->getMessage());
             return false;
         }
-        return true;
     }
 
-    public function destroyImages($tourguide) {
-        $images = TourguideImage::where('tourguide_id', $tourguide->id)->get();
+    public function destroyImages($id) {
+        $images = TourguideImage::where('tourguide_id', $id)->get();
         $length = count($images);
         try {
             for($i = 0; $i < $length; $i++) {
@@ -69,23 +67,44 @@ class TourguideService
                 Storage::delete($path);
                 $images[$i]->delete();
             }
+            return true;
         } catch (\Exception $err) {
             return false;
         }
-        return true;
     }
 
     public function destroy($request)
     {
-        $tourguide = Tourguide::where('id', $request->input('id'))->first();
+        $id = $request->input('id');
+        $tourguide = Tourguide::find($id);
+
         if ($tourguide) {
-            $rs = $this->destroyImages($tourguide);
-            if ($rs === true) {
+            $rs = $this->destroyImages($id);
+            if ($rs) {
                 return $tourguide->delete();
             }
             return false;
         }
         return false;
     }
-    
+
+    public function destroySelected($request)
+    {
+        $ids =  explode(',', $request->ids);
+        $tourguides = Tourguide::whereIn('id', $ids)->get();
+        $length = count($tourguides);
+
+        if ($tourguides) {
+            try {
+                for($i = 0; $i < $length; $i++) {
+                    $this->destroyImages($tourguides[$i]->id);
+                    $tourguides[$i]->delete();
+                }
+                return true;
+            } catch (\Exception $err) {
+                return false;
+            }
+        }
+        return false;
+    }
 }

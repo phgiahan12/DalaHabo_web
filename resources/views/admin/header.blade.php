@@ -21,12 +21,8 @@
 <link rel="stylesheet" href="/template/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="/template/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/template/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
-
-<!-- summernote
-<link rel="stylesheet" href="/template/admin/plugins/summernote/summernote-bs4.min.css">
-CodeMirror -->
-<!-- <link rel="stylesheet" href="/template/admin/plugins/codemirror/codemirror.css">
-<link rel="stylesheet" href="/template/admin/plugins/codemirror/theme/monokai.css"> -->
-
+<!-- Crop Tool -->
+<link rel="stylesheet" href="/template/admin/plugins/ijaboCropTool/ijaboCropTool.min.css">
+<!-- SweetAlert2 -->
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 @yield('header')

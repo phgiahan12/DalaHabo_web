@@ -10,28 +10,9 @@ use Illuminate\Support\Facades\Session;
 class PlaceService
 {
 
-    public function create($request)
-    {
-        try {
-            $request->except("_token");
-            Place::create([
-                'name' => (string) $request->input('name'),
-                'category_id' => (int) $request->input('categoryId'),
-                'address' => (string) $request->input('address'),
-                'location' => (string) $request->input('location'),
-                'summary' => (string) $request->input('summary'),
-                'description' => (string) $request->input('description'),
-            ]);
-        } catch (\Exception $err) {
-            Session::flash('error', $err->getMessage());
-            return false;
-        }
-        return true;
-    }
-
     public function getAll()
     {
-        return Place::with('category')->orderBy('name')->paginate(10);
+        return Place::with('category')->orderBy('id')->search()->paginate(10);
     }
 
     public function getPlaceId()
@@ -45,22 +26,39 @@ class PlaceService
         return Place::count();
     }
 
+    public function create($request)
+    {
+        try {
+            $request->except("_token");
+            Place::create([
+                'name' => (string) $request->input('name'),
+                'category_id' => (int) $request->input('categoryId'),
+                'address' => (string) $request->input('address'),
+                'location' => (string) $request->input('location'),
+                'summary' => (string) $request->input('summary'),
+                'description' => (string) $request->input('description'),
+            ]);
+            return true;
+        } catch (\Exception $err) {
+            return false;
+        }
+    }
+
     public function update($place, $request)
     {
         try {
+            $request->except("_token");
             $place->fill($request->input());
             $place->save();
 
-            Session::flash('success', 'Cập nhật thành công');
+            return $place;
         } catch (\Exception $err) {
-            Session::flash('error', $err->getMessage());
-            return false;
+            return $err;
         }
-        return true;
     }
 
-    public function destroyImages($places) {
-        $images = PlaceImage::where('place_id', $places->id)->get();
+    public function destroyImages($id) {
+        $images = PlaceImage::where('place_id', $id)->get();
         $length = count($images);
         try {
             for($i = 0; $i < $length; $i++) {
@@ -68,21 +66,42 @@ class PlaceService
                 Storage::delete($path);
                 $images[$i]->delete();
             }
+            return true;
         } catch (\Exception $err) {
             return false;
         }
-        return true;   
     }
 
     public function destroy($request)
     {
-        $places = Place::where('id', $request->input('id'))->first();
+        $id = $request->input('id');
+        $place = Place::find($id);
+
+        if ($place) {
+            $this->destroyImages($id);
+            
+            $place->delete();
+            return true;
+        }
+        return false;
+    }
+
+    public function destroySelected($request)
+    {
+        $ids =  explode(',', $request->ids);
+        $places = Place::whereIn('id', $ids)->get();
+        $length = count($places);
+
         if ($places) {
-            $rs = $this->destroyImages($places);
-            if ($rs === true) {
-                return $places->delete();
+            try {
+                for($i = 0; $i < $length; $i++) {
+                    $this->destroyImages($places[$i]->id);
+                    $places[$i]->delete();
+                }
+                return true;
+            } catch (\Exception $err) {
+                return false;
             }
-            return false;
         }
         return false;
     }

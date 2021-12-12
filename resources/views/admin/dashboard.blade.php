@@ -77,11 +77,11 @@
                 <!-- small card -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>50</h3>
-                        <p>Bài viết</p>
+                        <h3>120</h3>
+                        <p>Đơn đặt hẹn</p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-blog"></i>
+                        <i class="fas fa-shopping-cart"></i>
                     </div>
                     <a href="#" class="small-box-footer">
                         Chi tiết <i class="fas fa-arrow-circle-right"></i>
@@ -94,13 +94,13 @@
                 <!-- small card -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>120</h3>
-                        <p>Đơn đặt hẹn</p>
+                        <h3>50</h3>
+                        <p>Bài viết</p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-shopping-cart"></i>
+                        <i class="fas fa-blog"></i>
                     </div>
-                    <a href="#" class="small-box-footer">
+                    <a href="/admin/blogs/all" class="small-box-footer">
                         Chi tiết <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>

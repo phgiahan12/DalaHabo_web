@@ -7,20 +7,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Place\CreateFormRequest;
 use App\Http\Services\Place\PlaceService;
 use App\Http\Services\Category\CategoryService;
-use App\Http\Services\GalleryService;
+use App\Http\Services\Place\PlaceImageService;
 
 use App\Models\Place;
 use Illuminate\Http\JsonResponse;
 
 class PlaceController extends Controller
 {
-    protected $categoryService, $placeService, $galleryService;
+    protected $categoryService, $placeService, $placeImageService;
 
-    public function __construct(CategoryService $categoryService, PlaceService $placeService, GalleryService $galleryService)
+    public function __construct(CategoryService $categoryService, PlaceService $placeService, PlaceImageService $placeImageService)
     {
         $this->categoryService = $categoryService;
         $this->placeService = $placeService;
-        $this->galleryService = $galleryService;
+        $this->placeImageService = $placeImageService;
     }
 
     public function all()
@@ -29,7 +29,6 @@ class PlaceController extends Controller
             'title' => 'Địa điểm',
             'menu' => 'Danh sách địa điểm',
             'places' => $this->placeService->getAll(),
-            'count' => $this->placeService->count(),
         ]);
     }
 
@@ -42,16 +41,26 @@ class PlaceController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(CreateFormRequest $request)
     {
-
         $rsplace = $this->placeService->create($request);
-        if ($rsplace === true) {
-            $placeId = $this->placeService->getPlaceId();
-            $this->galleryService->createPlaceImages($request, $placeId);
+        if ($rsplace) {
+            $result = true;
+            if ($request->has('image')) {
+                $placeId = $this->placeService->getPlaceId();
+                $result = $this->placeImageService->create($request, $placeId);
+            }
+           
+            if($result) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Tạo mới thành công'
+                ]);
+            }
         }
-        return redirect()->back();
-        
+        return response()->json([
+            'error' => true,
+        ]);
     }
 
     public function show(Place $place)
@@ -67,13 +76,35 @@ class PlaceController extends Controller
 
     public function update(Place $place, CreateFormRequest $request)
     {
-        $this->placeService->update($place, $request);
-        return redirect('admin/places/all');
+        $result = $this->placeService->update($place, $request);
+        if($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Cập nhật thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true,
+        ]);
     }
 
     public function destroy(Request $request): JsonResponse
     {
         $result = $this->placeService->destroy($request);
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true,
+        ]);
+    }
+
+    public function destroySelected(Request $request): JsonResponse
+    {
+        $result = $this->placeService->destroySelected($request);
         if ($result) {
             return response()->json([
                 'error' => false,

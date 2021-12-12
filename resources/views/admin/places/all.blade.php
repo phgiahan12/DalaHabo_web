@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>{{$title}}</h1>
+                <h1>{{$menu}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -23,36 +23,43 @@
 </section>
 
 <section class="content">
-    @include('admin.alert')
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title"><strong>{{$menu}}</strong></h3>
-
-            <div class="pl-3 m-0 float-right">
-                <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 350px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm kiếm...">
-
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button>
+        <div class="card-header row">
+            <div class="col">
+                <div class="float-left">
+                    <form action="" class="form-inline" role="form">
+                        <div class="input-group input-group-sm" style="width: 250px">
+                            <label for="keyword" class="sr-only"></label>
+                            <input type="text" class="form-control" name="keyword" placeholder="Tìm kiếm">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                </div>
+                <div class="float-right">
+                    <!-- <a class="btn btn-default btn-sm mr-1" href="/admin/sliders/create">
+                        <i class="fas fa-print mr-1"></i> <span>Excel</span> 
+                    </a> -->
+                    <button class="btn btn-danger btn-sm d-none" id="deleteAllBtn" onClick="removeAll('/admin/places/destroy-selected', 'places-table')">
+                        Xóa
+                    </button>
                 </div>
             </div>
         </div>
         <!-- /.card-header -->
 
         <div class="card-body p-0 table-responsive">
-            <table class="table table-hover" id="placestable">
+            <table class="table table-hover" id="places-table">
                 <thead>
                     <tr>
-                        <!-- <th style="width:5%">STT</th> -->
+                        <th style="width:2%"><input type="checkbox" name="main_checkbox"><label></label></th>
+                        <th style="width:5%">STT</th>
                         <th style="width:15%">Tên địa điểm</th>
                         <th style="width:10%">Danh mục</th>
-                        <th style="width:20%">Địa chỉ</th>
-                        <th style="width:20%">Tóm tắt</th>
+                        <th style="width:40%">Địa chỉ</th>
                         <th style="width:10%" class="text-center">Hình ảnh</th>
                         <th style="width:10%" class="text-center">Sửa/ Xóa</th>
                     </tr>
@@ -60,12 +67,15 @@
                     
                 <tbody>
                     @foreach($places as $key => $place)
-                        <tr>
-                            <!-- <td>{{$key + 1}}.</td> -->
+                        <tr id="{{$place->id}}" name="item">
+                            <td>
+                                <input type="checkbox" id="item_checkbox" name="item_checkbox" data-id="{{$place->id}}">
+                                <!-- <label for="slider_checkbox"></label> -->
+                            </td>
+                            <td>{{$key + 1}}.</td>
                             <td>{{$place->name}}</td>
                             <td>{{$place->category->name}}</td>
                             <td>{{$place->address}}</td>
-                            <td>{{$place->summary}}</td>
                             <td class="text-center">
                                 <a class="btn btn-primary btn-sm " href="/admin/places/galleries/{{$place->id}}">
                                     <span class="font-weight-bold">Xem</span>
@@ -76,7 +86,7 @@
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
                                 <a class="btn btn-danger btn-sm" href="#"
-                                    onClick="removeRow('{{$place->id}}', '/admin/places/destroy')">
+                                    onClick="removeRow('{{$place->id}}', '/admin/places/destroy', 'places-table')">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -89,18 +99,19 @@
 
         <div class="card-footer clearfix">
             <div class="row">
-                <div class="col-md-6 mt-1">
+                <div class="col-md-6 mt-1" id="count">
+                    <?php $count = count($places); ?>
                     <?php if($count === 0) : ?>
-                        <strong>Chưa có địa điểm nào</strong>
+                        <strong>Chưa có dữ liệu</strong>
                     <?php else : ?>
-                        <strong>Số lượng địa điểm: {{$count}}</strong>
+                        <strong>Số lượng: {{$count}}</strong>
                     <?php endif; ?>
                 </div>
                 
                 <div class="col-md-6">
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-end mb-0">
-                           {!! $places->links() !!}
+                           {!! $places->appends(request()->all())->links() !!}
                         </ul>
                     </nav>
                 </div>
@@ -117,7 +128,7 @@
 @section('footer')
 <script>
   $(function () {
-    $('#placestable').DataTable({
+    $('#places-table').DataTable({
         "paging": false,
         "lengthChange": false,
         "searching": false,
@@ -127,16 +138,16 @@
         columnDefs: [
             {
                 orderable: false,
-                targets: 2,
-            }, {
-                orderable: false,
-                targets: 3,
+                targets: 0,
             }, {
                 orderable: false,
                 targets: 4,
             }, {
                 orderable: false,
                 targets: 5,
+            }, {
+                orderable: false,
+                targets: 6,
             }
         ],
         "autoWidth": false,

@@ -18,4 +18,11 @@ class Category extends Model
     public function places() {
         return $this->hasMany(Place::class);
     }
+
+    public function scopeSearch($query) {
+        if($keyword = request()->keyword) {
+            $query = $query->where('name', 'like', '%' . $keyword . '%');
+        }
+        return $query;
+    }
 }

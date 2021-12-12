@@ -24,7 +24,6 @@ class CategoryController extends Controller
             'title' => 'Danh mục',
             'menu' => 'Danh sách danh mục',
             'categories' => $this->categoryService->getAll(),
-            'count' => $this->categoryService->count(),
         ]);
     }
 
@@ -38,8 +37,16 @@ class CategoryController extends Controller
 
     public function store(CreateFormRequest $request)
     {
-        $this->categoryService->create($request);
-        return redirect()->back();
+        $result = $this->categoryService->create($request);
+        if($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Tạo mới thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true
+        ]);
     }
 
     public function show(Category $category)
@@ -54,13 +61,35 @@ class CategoryController extends Controller
 
     public function update(Category $category, CreateFormRequest $request)
     {
-        $this->categoryService->update($category, $request);
-        return redirect('admin/categories/all');
+        $result = $this->categoryService->update($category, $request);
+        if($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Cập nhật thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true
+        ]);
     }
 
     public function destroy(Request $request): JsonResponse
     {
         $result = $this->categoryService->destroy($request);
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true
+        ]);
+    }
+
+    public function destroySelected(Request $request): JsonResponse
+    {
+        $result = $this->categoryService->destroySelected($request);
         if ($result) {
             return response()->json([
                 'error' => false,

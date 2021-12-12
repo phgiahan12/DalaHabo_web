@@ -11,6 +11,20 @@ use Illuminate\Support\Facades\Session;
 class CategoryService
 {
 
+    public function getAll()
+    {
+        return Category::orderBy('id')->search()->get();
+    }
+
+    public function count()
+    {
+        return Category::count();
+    }
+
+    public function getPlacesbyCategoryID($id) {
+        return Place::where('category_id', $id)->get();
+    }
+
     public function create($request)
     {
         try {
@@ -20,22 +34,10 @@ class CategoryService
                 'description' => (string) $request->input('description'),
                 'active' => (int) $request->input('active'),
             ]);
-            Session::flash('success', 'Tạo mới thành công');
         } catch (\Exception $err) {
-            Session::flash('error', $err->getMessage());
             return false;
         }
         return true;
-    }
-
-    public function getAll()
-    {
-        return Category::all();
-    }
-
-    public function count()
-    {
-        return Category::count();
     }
 
     public function update($category, $request)
@@ -44,16 +46,10 @@ class CategoryService
             $category->fill($request->input());
             $category->save();
 
-            Session::flash('success', 'Cập nhật thành công');
+            return true;
         } catch (\Exception $err) {
-            Session::flash('error', $err->getMessage());
             return false;
         }
-        return true;
-    }
-
-    public function getPlacesbyCategoryID($category) {
-        return Place::where('category_id', $category->id)->get();
     }
 
     public function destroyImages($images) {
@@ -86,14 +82,40 @@ class CategoryService
 
     public function destroy($request)
     {
-        $category = Category::where('id', $request->input('id'))->first();
+        $id = $request->input('id');
+        $category = Category::find($id);
+        
         if ($category) {
-            $places = $this->getPlacesbyCategoryID($category);
+            $places = $this->getPlacesbyCategoryID($id);
             $result = $this->destroyPlaces($places);
             if ($result === true) {
-                return Category::where('id', $request->input('id'))->delete();
+                return $category->delete();
             }
             return false;
+        }
+        return false;
+    }
+
+    public function destroySelected($request)
+    {
+        $ids =  explode(',', $request->ids);
+
+        $categories = Category::whereIn('id', $ids)->get();
+        $length = count($categories);
+        
+        if ($categories) {
+            try {
+                for($i = 0; $i < $length; $i++) {
+                    $places = $this->getPlacesbyCategoryID($categories[$i]->id);
+                    $result = $this->destroyPlaces($places);
+                    if ($result) {
+                        $categories[$i]->delete();
+                    }
+                }
+                return true;
+            } catch (\Exception $err) {
+                return false;
+            }
         }
         return false;
     }

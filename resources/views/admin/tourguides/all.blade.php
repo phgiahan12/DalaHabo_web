@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>{{$title}}</h1>
+                <h1>{{$menu}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -23,45 +23,57 @@
 </section>
 
 <section class="content">
-    @include('admin.alert')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title"><strong>{{$menu}}</strong></h3>
-
-            <div class="pl-3 m-0 float-right">
-                <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 350px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm kiếm...">
-
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button>
+            <div class="col">
+                <div class="float-left">
+                    <form action="" class="form-inline" role="form">
+                        <div class="input-group input-group-sm" style="width: 250px">
+                            <label for="keyword" class="sr-only"></label>
+                            <input type="text" class="form-control" name="keyword" placeholder="Tìm kiếm">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                </div>
+                <div class="float-right">
+                    <!-- <a class="btn btn-default btn-sm mr-1" href="/admin/sliders/create">
+                        <i class="fas fa-print mr-1"></i> <span>Excel</span> 
+                    </a> -->
+                    <button class="btn btn-danger btn-sm d-none" id="deleteAllBtn" onClick="removeAll('/admin/tourguides/destroy-selected', 'tourguides-table')">
+                        Xóa
+                    </button>
                 </div>
             </div>
         </div>
         <!-- /.card-header -->
 
         <div class="card-body p-0 table-responsive">
-            <table class="table table-hover" id="tourguidestable">
+            <table class="table table-hover" id="tourguides-table">
                 <thead>
                     <tr>
-                        <!-- <th style="width:8%">STT</th> -->
-                        <th style="width:20%">Họ tên</th>
-                        <th style="width:10%">Ngày sinh</th>
-                        <th style="width:10%">Giới tính</th>
-                        <th style="width:20%">Email</th>
-                        <th style="width:10%">SDT</th>
-                        <th style="width:10%" class="text-center">Hình ảnh</th>
-                        <th style="width:10%">Giá thuê</th>
-                        <th class="text-center">Sửa/Xóa</th>
+                        <th style="width:2%"><input type="checkbox" name="main_checkbox"><label></label></th>
+                        <th style="width:5%">STT</th>
+                        <th>Họ tên</th>
+                        <th>Ngày sinh</th>
+                        <th>Giới tính</th>
+                        <th>Email</th>
+                        <th>SDT</th>
+                        <th style="width:8%" class="text-center">Hình ảnh</th>
+                        <th>Giá thuê</th>
+                        <th class="text-center" style="width:10%">Sửa/Xóa</th>
                     </tr>
                 </thead>
                     @foreach($tourguides as $key => $tourguide)
-                        <tr>
-                            <!-- <td>{{$key + 1}}.</td> -->
+                        <tr id="{{$tourguide->id}}" name="item">
+                            <td>
+                                <input type="checkbox" id="item_checkbox" name="item_checkbox" data-id="{{$tourguide->id}}">
+                                <!-- <label for="slider_checkbox"></label> -->
+                            </td>
+                            <td>{{$key + 1}}.</td>
                             <td>{{$tourguide->name}}</td>
                             <td>{{$tourguide->dob}}</td>
                             @if($tourguide->gender === 0)
@@ -78,13 +90,13 @@
                                 </a>
                             </td>
                             
-                            <td id="rental_price">{{$tourguide->rental_price}}</td>
+                            <td class="money" id="rental_price">{{number_format($tourguide->rental_price, 0, '', '.')}} VNĐ</td>
                             <td class="text-center">
                                 <a class="btn btn-info btn-sm " href="/admin/tourguides/edit/{{$tourguide->id}}">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
                                 <a class="btn btn-danger btn-sm" href="#"
-                                    onClick="removeRow('{{$tourguide->id}}', '/admin/tourguides/destroy')">
+                                    onClick="removeRow('{{$tourguide->id}}', '/admin/tourguides/destroy', 'tourguides-table')">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -97,18 +109,19 @@
         </div>
         <!-- /.card-body -->
 
-        <div class="row card-footer clearfix">
+        <div class="row card-footer clearfix" id="count">
             <div class="col-md-6 mt-1">
+                <?php $count = count($tourguides); ?>
                 <?php if($count === 0) : ?>
-                    <strong>Chưa có hướng dẫn viên nào</strong>
+                    <strong>Chưa có dữ liệu</strong>
                 <?php else : ?>
-                    <strong>Số lượng hướng dẫn viên: {{$count}}</strong>
+                    <strong>Số lượng: {{$count}}</strong>
                 <?php endif; ?>
             </div>
             <div class="col-md-6">
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-end mb-0">
-                        {!! $tourguides->links() !!}
+                        {!! $tourguides->appends(request()->all())->links() !!}
                     </ul>
                 </nav>
             </div>
@@ -122,7 +135,7 @@
 @section('footer')
 <script>
     $(function () {
-        $('#tourguidestable').DataTable({
+        $('#tourguides-table').DataTable({
             "paging": false,
             "lengthChange": false,
             "searching": false,
@@ -132,16 +145,20 @@
             columnDefs: [
                 {
                     orderable: false,
-                    targets: 3,
-                }, {
-                    orderable: false,
-                    targets: 4,
-                }, {
+                    targets: 0,
+                },
+                {
                     orderable: false,
                     targets: 5,
                 }, {
                     orderable: false,
+                    targets: 6,
+                }, {
+                    orderable: false,
                     targets: 7,
+                }, {
+                    orderable: false,
+                    targets: 9,
                 }
             ],
             "autoWidth": false,

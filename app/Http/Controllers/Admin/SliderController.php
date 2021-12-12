@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Slider\CreateFormRequest;
 use App\Http\Services\Slider\SliderService;
 use App\Models\Slider;
-
 class SliderController extends Controller
 {
     protected $sliderService;
@@ -24,7 +23,6 @@ class SliderController extends Controller
             'title' => 'Slider',
             'menu' => 'Danh sách slider',
             'sliders' => $this->sliderService->getAll(),
-            'count' => $this->sliderService->count(),
         ]);
     }
 
@@ -38,8 +36,16 @@ class SliderController extends Controller
 
     public function store(CreateFormRequest $request)
     {
-        $this->sliderService->create($request);
-        return redirect()->back();
+        $result = $this->sliderService->create($request);
+        if($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Tạo mới thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true
+        ]);
     }
 
     public function show(Slider $slider)
@@ -54,8 +60,16 @@ class SliderController extends Controller
 
     public function update(Slider $slider, CreateFormRequest $request)
     {
-        $this->sliderService->update($slider, $request);
-        return redirect('admin/sliders/all');
+        $result = $this->sliderService->update($slider, $request);
+        if($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Cập nhật thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true
+        ]);
     }
 
     public function destroy(Request $request): JsonResponse
@@ -69,6 +83,20 @@ class SliderController extends Controller
         }
         return response()->json([
             'error' => true
+        ]);
+    }
+
+    public function destroySelected(Request $request): JsonResponse
+    {
+        $result = $this->sliderService->destroySelected($request);
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true,
         ]);
     }
 }

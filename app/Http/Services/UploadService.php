@@ -10,12 +10,14 @@ class UploadService
     {
         if ($request->hasFile('file')) {
             try {
-                $get_full_image_name = $request->file('file')->getClientOriginalName();
-                $image_name = current(explode('.', $get_full_image_name));
-                $name = $image_name.rand(0, 99) . '.' . $request->file('file')->getClientOriginalExtension();
+                $file = $request->file('file');
+                $folder = $request->input('folder');
+                $pre = strtoupper(substr($folder, 0, 1));
 
-                $path_full = 'uploads/sliders';
-                $request->file('file')->storeAs(
+                $name = $pre . 'IMG' . date('Ymd') . uniqid() . '.' . $file->getClientOriginalExtension();
+
+                $path_full = 'uploads/' . $folder;
+                $file->storeAs(
                     'public/' . $path_full, $name
                 );
 

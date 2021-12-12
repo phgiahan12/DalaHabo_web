@@ -22,13 +22,20 @@ class CreateFormRequest extends FormRequest
      */
     public function rules() {
         return [
-            'email' => 'email:filter',
+            'name' => 'required',
+            'email' => 'required|email:filter',
+            'phone' => 'required',
+            'rental_price' => 'required',
         ];
     }
 
     public function messages() : array {
         return [
+            'name.required' => 'Vui lòng nhập họ tên',
+            'email.required' => 'Vui lòng nhập email',
             'email' => 'Email không hợp lệ',
+            'phone.required' => 'Vui lòng nhập số điện thoại',
+            'rental_price.required' => 'Vui lòng nhập giá thuê',
         ];
     }
 }

@@ -5,7 +5,7 @@
             <li>{{ $error }}</li>
         @endforeach
         <!-- </ul> -->
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <button type="button" class="close" style="padding-top: 10px;" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -18,6 +18,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+    
 @endif
 
 @if (Session::has('success'))

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use App\Http\Services\Place\PlaceService;
 use App\Http\Services\Tourguide\TourguideService;
-
+use Illuminate\Support\Facades\Auth;
 class MainController extends Controller
 {
     protected $placeService, $tourguideService;

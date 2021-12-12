@@ -26,4 +26,10 @@ class Place extends Model
         return $this->hasMany(PlaceImages::class);
     }
    
+    public function scopeSearch($query) {
+        if($keyword = request()->keyword) {
+            $query = $query->where('name', 'like', '%' . $keyword . '%');
+        }
+        return $query;
+    }
 }

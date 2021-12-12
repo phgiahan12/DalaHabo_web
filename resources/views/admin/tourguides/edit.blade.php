@@ -29,7 +29,6 @@
 </section>
 
 <section class="content">
-    @include('admin.alert')
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-primary">
@@ -39,12 +38,13 @@
                 <!-- /.card-header -->
 
                 <!-- form start -->
-                <form action="" method="POST" id="form">
+                <form action="/admin/tourguides/edit/{{$tourguide->id}}" method="POST" id="edit-tourguide-form">
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="form-group col-md-4">
                                 <label for="name" class="col-form-label">Họ tên</label>
                                 <input type="text" name="name" value="{{$tourguide->name}}" class="form-control" placeholder="Họ tên">
+                                <span class="error invalid-feedback name_error"></span>
                             </div>
 
                             <div class="form-group col-md-3">
@@ -63,6 +63,7 @@
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
                                 </div>
+                                <span class="error invalid-feedback dob_error"></span>
                             </div>
                         </div>
 
@@ -70,11 +71,13 @@
                             <div class="form-group col-md-6">
                                 <label for="name" class="col-form-label">Email</label>
                                 <input type="text" name="email" value="{{$tourguide->email}}" class="form-control" placeholder="Email liên lạc">
+                                <span class="error invalid-feedback email_error"></span>
                             </div>
 
                             <div class="form-group col-md-5">
                                 <label for="name" class="col-form-label">Số điện thoại</label>
                                 <input type="text" name="phone" value="{{$tourguide->phone}}" class="form-control" placeholder="Số điện thoại liên lạc">
+                                <span class="error invalid-feedback phone_error"></span>
                             </div> 
                         </div>
 
@@ -82,6 +85,7 @@
                             <div class="form-group col-md-11">
                                 <label for="price" class="col-form-label">Giá thuê (VNĐ/Giờ)</label>
                                 <input type="text" name="rental_price" value="{{$tourguide->rental_price}}" class="form-control" placeholder="Giá thuê">
+                                <span class="error invalid-feedback rental_price_error"></span>
                             </div>
                         </div>
 
@@ -104,7 +108,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary float-right">Cập nhật</button>
-                        <a class="btn btn-light" href="/admin/tourguides/all" onClick="">
+                        <a class="btn btn-light" href="{{url()->previous()}}" onClick="">
                             <i class="fas fa-chevron-left mr-2"></i>
                             <span>Trở về</span>
                         </a>
@@ -148,7 +152,7 @@
 
     <script>
         $(function () {
-            $('#form').validate({
+            $('#edit-tourguide-form').validate({
                 rules: {
                     name: {
                         required: true,

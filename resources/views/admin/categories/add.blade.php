@@ -23,7 +23,6 @@
 </section>
 
 <section class="content">
-    @include('admin.alert')
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-primary">
@@ -33,18 +32,20 @@
                 <!-- /.card-header -->
 
                 <!-- form start -->
-                <form action="" method="POST" id="form">
+                <form action="/admin/categories/create" method="POST" id="add-category-form">
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="form-group col-md-11">
                                 <label for="category" class="col-form-label">Tên danh mục</label>
                                 <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Tên danh mục">
+                                <span class="error invalid-feedback name_error"></span>
                             </div>
                         </div>
                         <div class="row justify-content-center">
                             <div class="form-group col-md-11">
                                 <label class="col-form-label">Mô tả danh mục</label>
                                 <textarea style="resize:none" rows="4" name="description" class="form-control" id="category_description" placeholder="Mô tả danh mục">{{old('description')}}</textarea>
+                                <span class="error invalid-feedback description_error"></span>
                             </div>
                         </div>
                         <div class="row justify-content-center">
@@ -80,15 +81,21 @@
 @section('footer')
 <script>
         $(function () {
-            $('#form').validate({
+            $('#add-category-form').validate({
                 rules: {
                     name: {
                         required: true,
-                    },
+                    }, 
+                    description: {
+                        required: true,
+                    }
                 },
                 messages: {
                     name: {
                         required: "Vui lòng nhập tên danh mục",
+                    },
+                    description: {
+                        required: "Vui lòng nhập mô tả danh mục",
                     },
                 },
                 errorElement: 'span',

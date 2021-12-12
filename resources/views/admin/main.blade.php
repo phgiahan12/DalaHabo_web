@@ -75,14 +75,18 @@
                     <a data-toggle="dropdown" class="nav-link" href="#">
                         <div class="user-panel pb-2">
                             <div class="image">
-                                <img src="/template/admin/dist/img/avatar6.png" class="img-circle" alt="User Image">
+                                @if(Auth::user()->image)
+                                    <img src="{{Auth::user()->image}}" class="img-circle admin-picture" alt="User Image">
+                                @else
+                                    <img src="/template/admin/dist/img/avatar6.png" class="img-circle admin-picture" alt="User Image">
+                                @endif
                             </div>
-                            <span class="ml-2 d-none d-lg-inline small">{{Session::get('username')}}</span>
+                            <span class="ml-2 d-none d-lg-inline small admin-name">{{Auth::user()->name}}</span>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg">
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-suitcase mr-2"></i> Thông tin cá nhân
+                        <a href="/admin/user-profile" class="dropdown-item">
+                            <i class="fas fa-suitcase mr-2"></i> Thông tin tài khoản
                         </a>
                         <a href="#" class="dropdown-item">
                             <i class="fas fa-cog mr-2"></i> Cài đặt

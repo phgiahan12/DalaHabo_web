@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'image',
+        'role_id',
+        'token',
     ];
 
     /**
@@ -41,4 +45,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Check if the user has a role
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole($role) {
+        return null !== $this->role()->where('name', $role)->first();
+    }
+
+    public function scopeSearch($query) {
+        if($keyword = request()->keyword) {
+            $query = $query->where('name', 'like', '%' . $keyword . '%');
+        }
+        return $query;
+    }
+
+    // public function getImageAttribute($query) {
+    //     if($query) {
+    //         return asset($query);
+    //     }
+    // }
 }

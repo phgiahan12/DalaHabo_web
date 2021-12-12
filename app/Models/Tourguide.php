@@ -19,4 +19,11 @@ class Tourguide extends Model
         'description',
         'rental_price',
     ];
+
+    public function scopeSearch($query) {
+        if($keyword = request()->keyword) {
+            $query = $query->where('name', 'like', '%' . $keyword . '%');
+        }
+        return $query;
+    }
 }

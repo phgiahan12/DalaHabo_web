@@ -27,7 +27,6 @@
 </section>
 
 <section class="content">
-    @include('admin.alert')
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-primary">
@@ -37,12 +36,13 @@
                 <!-- /.card-header -->
 
                 <!-- form start -->
-                <form action="" method="POST" id="form">
+                <form action="/admin/places/create" method="POST" id="add-place-form">
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="form-group col-md-6">
                                 <label for="name" class="col-form-label">Tên địa điểm</label>
                                 <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Tên địa điểm">
+                                <span class="error invalid-feedback name_error"></span>
                             </div>
 
                             <div class="form-group col-md-5">
@@ -59,6 +59,7 @@
                             <div class="form-group col-md-6">
                                 <label for="name" class="col-form-label">Địa chỉ</label>
                                 <input type="text" name="address" value="{{old('address')}}" class="form-control" placeholder="Địa chỉ">
+                                <span class="error invalid-feedback address_error"></span>
                             </div>
 
                             <div class="form-group col-md-5">
@@ -77,7 +78,7 @@
                         <div class="row justify-content-center">
                             <div class="form-group col-md-11">
                                 <label class="col-form-label">Mô tả chi tiết</label>
-                                <textarea name="description" class="form-control" id="description" placeholder="Mô tả địa điểm">{{old('description')}}</textarea>
+                                <textarea name="description" class="form-control" id="description" placeholder="Mô tả địa điểm"></textarea>
                             </div>
                             
                         </div>
@@ -87,7 +88,7 @@
                                 <label class="col-form-label">Hình ảnh</label>
                                 <div class="form-group custom-file">
                                     <input type="file" class="custom-file-input" name="file[]" accept="image/*" id="mul-file-input" multiple>
-                                    <label class="custom-file-label" name="label" for="file[]" id="file"></label>
+                                    <label class="custom-file-label" name="label" for="file" id="file">{{old('label')}}</label>
                                 </div>
                                 <div class="row" id="images-show"></div>
                                 <input type="hidden" name="image" id="images">
@@ -110,63 +111,62 @@
 @endsection
 
 @section('footer')
-    <script>
-        CKEDITOR.replace('description', {
-            extraPlugins: 'editorplaceholder',
-            height: 200,
-            resize_minWidth: 200,
-            resize_minHeight: 300,
-            editorplaceholder: 'Mô tả chi tiết về địa điểm...',
-            removeButtons: 'PasteFromWord',
-            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-            filebrowserUploadMethod: 'form'
-        });
+<script>
+    CKEDITOR.replace('description', {
+        extraPlugins: 'editorplaceholder',
+        height: 200,
+        resize_minWidth: 200,
+        resize_minHeight: 300,
+        editorplaceholder: 'Mô tả chi tiết về địa điểm...',
+        removeButtons: 'PasteFromWord',
+        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
+    });
 
-        CKEDITOR.config.toolbarGroups = [
-            { name: 'mode'},
-            { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-            { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-            { name: 'links' },
-            { name: 'insert' },
-            '/',
-            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-            { name: 'styles' },
-            { name: 'colors' },
-            { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align'] },
-            { name: 'tools'}
-        ]
-    </script>
-    <script>
-        $(function () {
-            $('#form').validate({
-                rules: {
-                    name: {
-                        required: true,
-                    },
-                    address: {
-                        required: true,
-                    },
+    CKEDITOR.config.toolbarGroups = [
+        { name: 'mode'},
+        { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+        { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+        { name: 'links' },
+        { name: 'insert' },
+        '/',
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+        { name: 'styles' },
+        { name: 'colors' },
+        { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align'] },
+        { name: 'tools'}
+    ]
+    
+    $(function () {
+        $('#add-place-form').validate({
+            rules: {
+                name: {
+                    required: true,
                 },
-                messages: {
-                    name: {
-                        required: "Vui lòng nhập tên địa điểm",
-                    },
-                    address: {
-                        required: "Vui lòng nhập địa chỉ",
-                    },
+                address: {
+                    required: true,
                 },
-                errorElement: 'span',
-                errorPlacement: function (error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
+            },
+            messages: {
+                name: {
+                    required: "Vui lòng nhập tên địa điểm",
                 },
-                highlight: function (element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
+                address: {
+                    required: "Vui lòng nhập địa chỉ",
                 },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
-            });
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
         });
-    </script>
+    });
+</script>
 @endsection

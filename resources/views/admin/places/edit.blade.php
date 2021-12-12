@@ -29,7 +29,6 @@
 </section>
 
 <section class="content">
-    @include('admin.alert')
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-primary">
@@ -39,17 +38,18 @@
                 <!-- /.card-header -->
 
                 <!-- form start -->
-                <form action="" method="POST" id="form">
+                <form action="/admin/places/edit/{{$place->id}}" method="POST" id="edit-place-form">
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="form-group col-md-6">
                                 <label for="name" class="col-form-label">Tên địa điểm</label>
                                 <input type="text" name="name" value="{{$place->name}}" class="form-control" placeholder="Tên địa điểm">
+                                <span class="error invalid-feedback name_error"></span>
                             </div>
 
                             <div class="form-group col-md-5">
-                                <label for="name" class="col-form-label">Danh mục</label>
-                                <select name="categoryId" class="form-control">
+                                <label for="category_id" class="col-form-label">Danh mục</label>
+                                <select name="category_id" class="form-control">
                                     @foreach ($categories as $category)
                                         <option value="{{$category->id}}" {{$place->category_id === $category->id ? 'selected' : ''}}>
                                             {{$category->name}}
@@ -63,6 +63,7 @@
                             <div class="form-group col-md-6">
                                 <label for="name" class="col-form-label">Địa chỉ</label>
                                 <input type="text" name="address" value="{{$place->address}}" class="form-control" placeholder="Địa chỉ">
+                                <span class="error invalid-feedback address_error"></span>
                             </div>
 
                             <div class="form-group col-md-5">
@@ -89,7 +90,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary float-right">Cập nhật</button>
-                        <a class="btn btn-light" href="/admin/places/all" onClick="">
+                        <a class="btn btn-light" href="{{url()->previous()}}" onClick="">
                             <i class="fas fa-chevron-left mr-2"></i>
                             <span>Trở về</span>
                         </a>
