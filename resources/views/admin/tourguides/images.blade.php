@@ -82,7 +82,7 @@
         <!-- /.card-header -->
 
         <div class="card-body p-0 table-responsive">
-            <table class="table table-hover" id="tourguide-images-table">
+            <table class="table table-hover table-bordered table-striped" id="tourguide-images-table">
                 <thead>
                     <tr>
                         <th style="width:5%"><input type="checkbox" name="main_checkbox"><label></label></th>

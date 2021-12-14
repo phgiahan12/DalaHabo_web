@@ -61,7 +61,7 @@ class UserController extends Controller
             ]);
         }
         return response()->json([
-            'error' => true
+            'error' => true,
         ]);
     }
 
@@ -75,7 +75,7 @@ class UserController extends Controller
             ]);
         }
         return response()->json([
-            'error' => true
+            'error' => true,
         ]);
     }
 

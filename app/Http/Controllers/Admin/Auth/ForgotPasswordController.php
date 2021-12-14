@@ -45,7 +45,7 @@ class ForgotPasswordController extends Controller
             );
             $this->sendEmail($data);
 
-            return redirect()->back()->with('success', 'Email xác nhận đã được gửi. <br> Vui lòng kiểm tra email của bạn');
+            return redirect()->back()->with('success', 'Email xác nhận đã được gửi. Vui lòng kiểm tra email của bạn');
         } else {
             return redirect()->back()->with('error', 'Không tìm thấy email người dùng');
         }

@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>{{$menu}}</h1>
+                <h1>{{$title}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -24,9 +24,10 @@
 
 <section class="content">
     <div class="card">
-        <div class="card-header row">
+        <div class="card-header">
+            <h3 class="card-title">{{$menu}}</h3>
             <div class="col">
-                <div class="float-left">
+                <!-- <div class="float-left">
                     <form action="" class="form-inline" role="form">
                         <div class="input-group input-group-sm" style="width: 250px">
                             <label for="keyword" class="sr-only"></label>
@@ -38,7 +39,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
                 <div class="float-right">
                     <!-- <a class="btn btn-default btn-sm mr-1" href="/admin/sliders/create">
                         <i class="fas fa-print mr-1"></i> <span>Excel</span> 
@@ -51,9 +52,9 @@
         </div>
         <!-- /.card-header -->
 
-        <div class="card-body p-0 table-responsive">
+        <div class="card-body p-3 table-responsive">
         
-            <table class="table table-hover" id="users-table">
+            <table class="table table-hover table-bordered table-striped" style="margin-top: 6px !important;" id="users-table">
                 <thead>
                     <tr>
                         <th style="width:2%"><input type="checkbox" name="main_checkbox"><label></label></th>
@@ -88,15 +89,12 @@
                         <td>{{$account->created_at}}</td>
                         <td>{{$account->updated_at}}</td>
                         <td class="text-center">
-                            <a class="btn btn-info btn-sm " href="/admin/users/edit/{{$account->id}}">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-
-                            @if($account->id === Auth::user()->id || $account->role->name === 'Admin')
-                                <a class="btn btn-danger disabled btn-sm" href="#">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                            @if($account->id === Auth::user()->id || $account->role->name === 'Admin')    
                             @else
+                                <a class="btn btn-info btn-sm " href="/admin/users/edit/{{$account->id}}">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+
                                 <a class="btn btn-danger btn-sm" href="#"
                                     onClick="removeRow('{{$account->id}}', '/admin/users/destroy', 'users-table')">
                                     <i class="fas fa-trash"></i>
@@ -140,7 +138,7 @@
         $('#users-table').DataTable({
             "paging": false,
             "lengthChange": false,
-            "searching": false,
+            // "searching": false,
             "info": false,
         
             "aaSorting": [],
@@ -158,7 +156,8 @@
             ],
             "autoWidth": false,
             "responsive": true,
-        });
+            "buttons": ["excel", "pdf", "print", "colvis"],
+        }).buttons().container().appendTo('#users-table_wrapper .col-md-6:eq(0)');
     });
 </script>
 @endsection

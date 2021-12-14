@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>{{$menu}}</h1>
+                <h1>{{$title}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -24,9 +24,10 @@
 
 <section class="content">
     <div class="card">
-        <div class="card-header row">
+        <div class="card-header">
+            <h3 class="card-title">{{$menu}}</h3>
             <div class="col">
-                <div class="float-left">
+                <!-- <div class="float-left">
                     <form action="" class="form-inline" role="form">
                         <div class="input-group input-group-sm" style="width: 250px">
                             <label for="keyword" class="sr-only"></label>
@@ -38,7 +39,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
 
                 <div class="float-right">
                     <!-- <a class="btn btn-default btn-sm mr-1" href="/admin/sliders/create">
@@ -55,7 +56,7 @@
 
         <div class="card-body p-0 table-responsive">
         
-            <table class="table table-hover" id="categories-table">
+            <table class="table table-hover table-bordered table-striped" id="categories-table">
                 <thead>
                     <tr>
                         <th style="width:2%"><input type="checkbox" name="main_checkbox"><label></label></th>

@@ -57,7 +57,7 @@
         <!-- /.card-header -->
 
         <div class="card-body p-0 table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover table-bordered table-striped">
                 <thead>
                     <tr>
                         <th style="width:8%">ID</th>
@@ -78,8 +78,8 @@
                             <td>Gia Hân</td>
                             <td>7 địa điểm không thể bỏ qua khi đến Đà Lạt khi đến Đà Lạt khi đến Đà Lạt khi đến Đà Lạt khi đến Đà Lạt</td>
                             <td>
-                                <a href="/storage/uploads/sliders/home180.png" target="_blank">
-                                    <img src="/storage/uploads/sliders/home180.png" width="100%">
+                                <a href="/storage/uploads/places/PIMG2021120761aec88023758.jpg" target="_blank">
+                                    <img src="/storage/uploads/places/PIMG2021120761aec88023758.jpg" width="100%">
                                 </a>
                             </td>
                             <td class="timestamp">2021-12-01 22:11:07</td>

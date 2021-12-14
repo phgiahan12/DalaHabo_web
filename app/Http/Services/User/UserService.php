@@ -4,7 +4,7 @@ namespace App\Http\Services\User;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
-
+use App\Helpers\Helper;
 class UserService
 {
     public function getUser($request)
@@ -18,12 +18,27 @@ class UserService
         return User::with('role')->orderBy('id')->search()->paginate(10);
     }
 
+    public function createAvatar($char) {
+        $path = 'storage/uploads/users/';
+        $fontPath = public_path('fonts/Roboto-Bold.ttf');
+        $char = strtoupper($char);
+        $newAvatarName = "UIMG" . date('Ymd') . uniqid() . '.png';
+        $dest = $path . $newAvatarName;
+        $createAvatar = \App\Helpers\Helper::makeAvatar($fontPath, $dest, $char);
+        return $createAvatar;
+    }
     public function create($request) {
+        if (!$request->input('image')) {
+            $char = $request->input('name')[0];
+            $image = $this->createAvatar($char);
+        } else {
+            $image = $request->input('image');
+        }
         try {
             User::create([
                 'name' => (string) $request->input('name'),
                 'phone' => (string) $request->input('phone'),
-                'image' => (string) $request->input('image'),
+                'image' => (string) $image,
                 'email' => (string) $request->input('email'),
                 'password' => (string) bcrypt($request->input('password')),
                 'role_id' => (int) $request->input('role_id'),
